@@ -1,0 +1,29 @@
+{
+  "slug": "club-posters",
+  "title": "Posters",
+  "year": "2023",
+  "medium": "Canva",
+  "size": "A4",
+  "category": "Graphic Design",
+  "paragraphs": [
+    "Created posters for the Economics Society and Debate Club using Canva. Developed distinct visual directions for each club—from a bold, flashy composition for the Economics Society to a clear, structured layout for the Debate Club."
+  ],
+  "related": [
+    "re-imagining-memory",
+    "miya-deco-atelier",
+    "flowstage",
+    "vis-major-ss26"
+  ],
+  "cover": "images/hPK24jP6lkT7l7vMNmilrNSO1Vc.png",
+  "images": [
+    {
+      "src": "images/hPK24jP6lkT7l7vMNmilrNSO1Vc.png",
+      "alt": ""
+    },
+    {
+      "src": "images/mX7BbCVETwuNg2QBIFNICUNE2kc.png",
+      "alt": ""
+    }
+  ],
+  "order": 15
+}

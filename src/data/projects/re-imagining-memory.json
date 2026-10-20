@@ -1,0 +1,37 @@
+{
+  "slug": "re-imagining-memory",
+  "title": "Re/Imagining Memory",
+  "year": "2024",
+  "medium": "Canva, Adobe InDesign",
+  "size": "8.5x11in for print",
+  "category": "Graphic Design",
+  "paragraphs": [
+    "Designed and produced as the final written component of my high school artwork, this-19 page zine explores how the reconstructive nature of memory informs my visual practice. Created in Canva and Adobe InDesign, it combines research, personal reflection, and analyses of my own work through layered imagery, collage, and experimental typography."
+  ],
+  "related": [
+    "vis-major-ss26",
+    "flowstage",
+    "miya-deco-atelier",
+    "club-posters"
+  ],
+  "cover": "images/dlh7D3NVYzKY7ToSkru8AeCE6E.png",
+  "images": [
+    {
+      "src": "images/dlh7D3NVYzKY7ToSkru8AeCE6E.png",
+      "alt": ""
+    },
+    {
+      "src": "images/bqLGC1uzDrAJubunx6lxOacHo.png",
+      "alt": ""
+    },
+    {
+      "src": "images/xJh9ThyKifBstCat3njob2j0itg.png",
+      "alt": ""
+    },
+    {
+      "src": "images/vSOuLCsSIM7XoYI7PkZAjy62SHo.png",
+      "alt": ""
+    }
+  ],
+  "order": 7
+}

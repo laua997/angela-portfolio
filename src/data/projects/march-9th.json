@@ -1,0 +1,25 @@
+{
+  "slug": "march-9th",
+  "title": "March 9th",
+  "year": "2024",
+  "medium": "Oil on canvas",
+  "size": "60x48in",
+  "category": "2D",
+  "paragraphs": [
+    "This painting captures a moment that still feels vividly real: my friends and I, exhausted after our last day of exams, finally able to breathe. Painted in oil on canvas, the warm colors and loose handling reflect the energy of youth and friendship, evoking the nostalgia of small but significant moments of connection. Every time I look at this piece, I can still recall the soft music and background conversations that surrounded that memory."
+  ],
+  "related": [
+    "the-stars-in-my-sky",
+    "midnight-snack",
+    "between-skies",
+    "a-puzzle-of-nostalgia"
+  ],
+  "cover": "images/txKN3R1ptu7kPtyeXC1NfaFgM.jpeg",
+  "images": [
+    {
+      "src": "images/txKN3R1ptu7kPtyeXC1NfaFgM.jpeg",
+      "alt": ""
+    }
+  ],
+  "order": 3
+}

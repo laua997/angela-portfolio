@@ -1,0 +1,25 @@
+{
+  "slug": "between-skies",
+  "title": "Between Skies",
+  "year": "2022",
+  "medium": "Printed papers, soft pastel on paper",
+  "size": "24x18in",
+  "category": "2D",
+  "paragraphs": [
+    "Inspired by the collage techniques of Mimmo Rotella, this piece layers travel photographs over a soft pastel self-portrait, with deliberate tears revealing the fragments beneath. Each tear selectively uncovers cityscapes and skies from different places, reflecting how memories blend together: some vivid, others partially obscured or faded. The overlapping images and torn edges capture the feeling of holding onto fleeting moments, where places dissolve into one another to form something fragmented yet cherished, and essential to how I understand myself."
+  ],
+  "related": [
+    "the-stars-in-my-sky",
+    "self-reflections-or-lack-thereof",
+    "midnight-snack",
+    "familiar-forms"
+  ],
+  "cover": "images/yxINaU5Sky97PtT1QGEcCM3UQLc.jpeg",
+  "images": [
+    {
+      "src": "images/yxINaU5Sky97PtT1QGEcCM3UQLc.jpeg",
+      "alt": ""
+    }
+  ],
+  "order": 11
+}

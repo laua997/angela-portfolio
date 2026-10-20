@@ -1,0 +1,33 @@
+{
+  "slug": "miya-deco-atelier",
+  "title": "miya deco atelier",
+  "year": "2024",
+  "medium": "Procreate, Canva, Figma",
+  "size": "300dpi",
+  "category": "Graphic Design",
+  "paragraphs": [
+    "Developed a cohesive brand identity for an independent Etsy store creating whimsical and anime-inspired digital templates. Created using Procreate, Canva, and Figma, combining hand-drawn illustration, bilingual typography, and playful floral motifs across logo explorations and storefront graphics. This extended to designing two product listings, presenting the templates clearly and consistently for an online audience."
+  ],
+  "related": [
+    "club-posters",
+    "re-imagining-memory",
+    "flowstage",
+    "vis-major-ss26"
+  ],
+  "cover": "images/il5i0ZfqUkLForiurR5nhNNqY.png",
+  "images": [
+    {
+      "src": "images/il5i0ZfqUkLForiurR5nhNNqY.png",
+      "alt": ""
+    },
+    {
+      "src": "images/QDKymBhnixix4NY0c3D2XtX0RWw.png",
+      "alt": ""
+    },
+    {
+      "src": "images/Y6emfrrKwOnOc3tov6NXnDrEQ.png",
+      "alt": ""
+    }
+  ],
+  "order": 13
+}

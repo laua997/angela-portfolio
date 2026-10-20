@@ -1,0 +1,33 @@
+{
+  "slug": "the-stars-in-my-sky",
+  "title": "The Stars in My Sky",
+  "year": "2026",
+  "medium": "Oil on Canvas",
+  "size": "48x60in",
+  "category": "2D",
+  "paragraphs": [
+    "This painting is based on a Christmas scene in London, where strings of decorative lights line the streets above a moving crowd. Rather than real stars, the lights are seasonal and manufactured, yet they still function the same way: offering direction and a fixed point to look toward when a space feels overwhelming. The painting became a way of thinking about how something small and temporary can still provide a sense of orientation."
+  ],
+  "related": [
+    "between-skies",
+    "minimalism-deepdive",
+    "monochrome-exploration",
+    "midnight-snack"
+  ],
+  "cover": "images/9dEJWcERqhBH8KQVI5ADR2SeIM.jpeg",
+  "images": [
+    {
+      "src": "images/9dEJWcERqhBH8KQVI5ADR2SeIM.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "images/XLTHFn660CLmUEbMOhdT7Fu87w.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "images/qrU0qt3kjiuXyzze4I4nDqWesss.jpeg",
+      "alt": ""
+    }
+  ],
+  "order": 12
+}

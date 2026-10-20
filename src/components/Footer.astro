@@ -1,0 +1,21 @@
+---
+import { site } from "../lib/content";
+---
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <h2>angela lau.</h2>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <p class="footer-label">contact</p>
+        <a href={`mailto:${site.emails.school}`}>send an email</a>
+        <a href={site.links.linkedin} target="_blank" rel="noreferrer">linkedin</a>
+      </div>
+      <div class="footer-col">
+        <a href={site.links.resume} target="_blank" rel="noreferrer">resume</a>
+      </div>
+    </div>
+  </div>
+</footer>

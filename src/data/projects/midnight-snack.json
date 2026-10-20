@@ -1,0 +1,25 @@
+{
+  "slug": "midnight-snack",
+  "title": "Midnight Snack",
+  "year": "2023",
+  "medium": "Oil on canvas",
+  "size": "60x39.5in",
+  "category": "2D",
+  "paragraphs": [
+    "Inspired by Philip Wilson Steer's Hydrangeas, this painting captures a quiet, seemingly mundane moment: a girl and her cat in the cool glow of an open refrigerator late at night. Loose, bold brushstrokes disrupt realism and give the scene a dreamlike quality, while exaggerated contrasts between cool blues and bright yellows create visual tension. Beneath the surface, the girl's simple search becomes a metaphor for introspection and the unspoken needs that surface only in solitude."
+  ],
+  "related": [
+    "a-puzzle-of-nostalgia",
+    "self-reflections-or-lack-thereof",
+    "familiar-forms",
+    "monochrome-exploration"
+  ],
+  "cover": "images/x9NTdFi4KnehJSGZ7GHaxQLBNd8.png",
+  "images": [
+    {
+      "src": "images/x9NTdFi4KnehJSGZ7GHaxQLBNd8.png",
+      "alt": "Social Distance Media 1"
+    }
+  ],
+  "order": 5
+}

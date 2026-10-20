@@ -1,0 +1,65 @@
+---
+import Base from "../layouts/Base.astro";
+import HeroNav from "../components/HeroNav.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import { getProjects, site } from "../lib/content";
+
+const projects = getProjects();
+const bySlug = new Map(projects.map((project) => [project.slug, project]));
+const featured = site.featured
+  .map((item) => ({ ...item, project: bySlug.get(item.slug) }))
+  .filter((item) => item.project);
+const wins = site.wins.map((slug) => bySlug.get(slug)).filter(Boolean);
+---
+
+<Base>
+  <main id="main">
+    <section class="wrap hero home-hero">
+      <h1 class="appear appear-lg appear-d1">angela lau.</h1>
+      <div class="hero-side appear appear-d2">
+        <HeroNav />
+        <p class="lede">{site.tagline}</p>
+      </div>
+    </section>
+
+    <section class="wrap featured" aria-label="Featured projects">
+      <div class="featured-grid">
+        {
+          featured.map((item) => (
+            <div class={`place-${item.place} reveal`}>
+              <ProjectCard project={item.project!} />
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="wins">
+      <div class="wrap wins-grid">
+        <div>
+          <h2 class="reveal">wins.</h2>
+          <div class="wins-work">
+            {wins.map((project) => project && <div class="reveal"><ProjectCard project={project} /></div>)}
+          </div>
+        </div>
+        <div>
+          <h2 class="reveal">awards & recognition</h2>
+          <div class="awards">
+            {
+              site.awards.map((award) => (
+                <article class="award reveal">
+                  <div class="award-head">
+                    <p class="award-name">{award.name}</p>
+                    <p class="award-date">{award.date}</p>
+                  </div>
+                  <p class="award-prize">{award.prize}</p>
+                  <p class="award-detail">{award.detail}</p>
+                </article>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>

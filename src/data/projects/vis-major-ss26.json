@@ -1,0 +1,33 @@
+{
+  "slug": "vis-major-ss26",
+  "title": "Vis Major SS26",
+  "year": "2026",
+  "medium": "Adobe Photoshop, InDesign",
+  "size": "17×11in for print, published digitally",
+  "category": "Graphic Design",
+  "paragraphs": [
+    "An editorial themed “Fashion Capitals of the World” for NYU Fashion Business Association's zine Vis Major. Created in Adobe Photoshop and InDesign, with a focus on image-led storytelling, typographic hierarchy, and cohesive editorial layout. I collaborated with photographers, creative directors, and writers to translate each city's distinct fashion identity into a unified visual narrative across the spread."
+  ],
+  "related": [
+    "club-posters",
+    "re-imagining-memory",
+    "miya-deco-atelier",
+    "flowstage"
+  ],
+  "cover": "images/BaVmPyIf0zovyMEkduHrTNoxwc.png",
+  "images": [
+    {
+      "src": "images/BaVmPyIf0zovyMEkduHrTNoxwc.png",
+      "alt": ""
+    },
+    {
+      "src": "images/WIx99pE3Eke5IWnfSvgbTpDM3c.png",
+      "alt": ""
+    },
+    {
+      "src": "images/4D7isdtOCRSOEuvdM2TMZf2gI.png",
+      "alt": ""
+    }
+  ],
+  "order": 6
+}
