@@ -1,0 +1,18 @@
+---
+import { asset, href, type Project } from "../lib/content";
+
+interface Props {
+  project: Project;
+  showMeta?: boolean;
+}
+
+const { project, showMeta = false } = Astro.props;
+const alt = project.images[0]?.alt || project.title;
+---
+
+<a class="card" data-cursor="explore" data-category={project.category} href={href(`projects/${project.slug}`)}>
+  <img src={asset(project.cover)} alt={alt || project.title} />
+  <p class="card-title">{project.title}</p>
+  {showMeta && <p class="card-meta">{project.year}</p>}
+  {showMeta && <p class="card-meta">{project.category}</p>}
+</a>

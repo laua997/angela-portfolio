@@ -1,0 +1,90 @@
+{
+  "name": "Angela Lau",
+  "title": "Angela Lau - Portfolio",
+  "description": "i'm an artist and designer at NYU, but first and foremost a fan of all things creative.",
+  "tagline": "first and foremost, a fan of all things creative.",
+  "cursor": "images/9cB0pE8qLBt9I8D9nkeXP4lFaE.png",
+  "portrait": {
+    "src": "images/rwbIJP2adQGCcHbb4vJMwKyL5A.jpeg",
+    "alt": "Me"
+  },
+  "emails": {
+    "studio": "supply.nagi@gmail.com",
+    "school": "angela.lau@nyu.edu"
+  },
+  "links": {
+    "linkedin": "https://www.linkedin.com/in/angela-lau-636969212/",
+    "instagram": "https://www.instagram.com/nagi.supply/",
+    "x": "https://x.com/NagiSupply",
+    "schedule": "https://cal.com/",
+    "resume": "https://drive.google.com/file/d/165zyshf5kDsPLUDqaeLFdD7OgdGWgctf/view?usp=sharing"
+  },
+  "nav": [
+    { "label": "home", "href": "" },
+    { "label": "projects", "href": "projects" },
+    { "label": "about", "href": "about" },
+    { "label": "contact", "href": "contact" }
+  ],
+  "menu": [
+    { "label": "Home", "href": "" },
+    { "label": "Projects", "href": "projects" },
+    { "label": "About", "href": "about" },
+    { "label": "News", "href": "" },
+    { "label": "Contact", "href": "contact" }
+  ],
+  "featured": [
+    { "slug": "miya-deco-atelier", "place": "miya" },
+    { "slug": "flowstage", "place": "flow" },
+    { "slug": "vis-major-ss26", "place": "vis" },
+    { "slug": "the-symphony-of-life", "place": "sym" },
+    { "slug": "sensory-overload", "place": "sen" },
+    { "slug": "march-9th", "place": "mar" }
+  ],
+  "wins": ["minimalism-deepdive", "between-skies"],
+  "awards": [
+    {
+      "name": "Social Justice Awards (Art) Spring Competition",
+      "date": "05/2024",
+      "prize": "Second Prize",
+      "detail": "Top 4% out of 600 submissions; for a mixed-media piece showing that disability may set someone apart, but never removes them from humanity."
+    },
+    {
+      "name": "London Young Artist Season 1",
+      "date": "12/2023",
+      "prize": "Gold Award",
+      "detail": "Selected from 2,000 submissions for my oil painting, 'Ocean Heroes in Action,' responding to the competition's theme."
+    },
+    {
+      "name": "Harvard International Review Academic Writing Contest",
+      "date": "12/2023",
+      "prize": "Bronze",
+      "detail": "Top 20% out of 500 submissions; \"Revolutionizing Affordable Living\" — an essay exploring how 3D-printed housing could offer faster, cheaper, and more sustainable solutions to the global housing crisis facing indigenous communities and low-income countries."
+    },
+    {
+      "name": "Oxford High School",
+      "date": "2023-25",
+      "prize": "Art Scholarship",
+      "detail": "Awarded to 3 students out of a class of 63 for excellence in the visual arts"
+    }
+  ],
+  "about": {
+    "quote": ["\"a fan of all things creative\"", "is probably the most honest way i can describe myself."],
+    "paragraphs": [
+      "Growing up, that meant drawing, painting, sculpting, diy-ing my clothes, building kingdoms in Minecraft, and starting a journaling Youtube channel. If I could make it, I was making it.",
+      "That same energy is what eventually led me to Interactive Media Arts at NYU, where I get to explore the blurry, exciting overlap between fine art, graphic design, computing, and innovation. I've designed editorials for NYU FBA's zine Vis Major, built out brand identities and illustrations for independent projects, and i run a personal TikTok (@actuallymiyaa) that started as a way to document outfits i loved and wanted to remember.",
+      "I'm still pretty new to digital and web design, but as with any art form, you just have to sit with the confusion long enough to figure it out, and I'm very much in that process.",
+      "People say I'm type A because I'm always the one with the color-coded itinerary for the group trip. Fair, but day to day I'm more of a 70/30 split: organized enough to get things done, messy enough to keep it fun."
+    ]
+  },
+  "funFacts": [
+    "i've changed schools 6 times before uni, making me very adaptive.",
+    "if we're friends, you'll likely get handmade gifts for your bday.",
+    "my favorite artist is jean-honore fragonard.",
+    "whatever the task, give it to me. i WILL figure it out.",
+    "my favorite music genre is 2000s pop punk.",
+    "art to me = a tool to execute my vision.",
+    "for personal scheduling, physical planner > google calendar.",
+    "archivo black is my favorite font right now.",
+    "march 9th is my favorite piece."
+  ]
+}

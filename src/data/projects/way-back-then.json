@@ -1,0 +1,28 @@
+{
+  "slug": "way-back-then",
+  "title": "Way Back Then",
+  "year": "2024",
+  "medium": "Oil on canvas",
+  "size": "64x48in",
+  "category": "2D",
+  "paragraphs": [
+    "Depicting my earliest memory, this painting shows little me sitting in a stroller facing a hospital wall while my mother gave birth to my younger brother. Painted in a surrealist style with muted, grounded tones, the piece tries to capture how early memories exist at the edge of consciousness—both distant and oddly vivid, a collision of clarity and reconstructive distortion. The muted palette was intentional; I can't truly remember what I felt in that moment, whether it was fear, curiosity, or simply the unknowingness of being a child."
+  ],
+  "related": [
+    "march-9th",
+    "way-back-then",
+    "the-stars-in-my-sky"
+  ],
+  "cover": "images/kI92TE5qbTQlgK2Y0wgMcBHbcNM.jpg",
+  "images": [
+    {
+      "src": "images/kI92TE5qbTQlgK2Y0wgMcBHbcNM.jpg",
+      "alt": ""
+    },
+    {
+      "src": "images/YQ0x3Af5sx8aPeSORpQS43J4Xko.jpeg",
+      "alt": ""
+    }
+  ],
+  "order": 14
+}

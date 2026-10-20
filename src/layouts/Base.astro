@@ -1,0 +1,39 @@
+---
+import "../styles/global.css";
+import { asset, href, site } from "../lib/content";
+import Dock from "../components/Dock.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = site.title, description = site.description } = Astro.props;
+const path = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href={asset("favicon.png")} media="(prefers-color-scheme: light)" />
+    <link rel="icon" href={asset("images/MTtCyJbGyrIXH2VR0vV5iBohTUM.png")} media="(prefers-color-scheme: dark)" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+  </head>
+  <body data-cursor={asset(site.cursor)}>
+    <a class="skip" href="#main">Skip to content</a>
+    <Dock />
+    <slot />
+    <Footer />
+    <script>
+      import "../scripts/site.js";
+    </script>
+  </body>
+</html>

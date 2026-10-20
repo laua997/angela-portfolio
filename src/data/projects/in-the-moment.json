@@ -1,0 +1,39 @@
+{
+  "slug": "in-the-moment",
+  "title": "In the Moment",
+  "year": "2024",
+  "medium": "Oil on canvas",
+  "size": "Each 64x48in",
+  "category": "2D",
+  "paragraphs": [
+    "These two pieces depict different types of memory. The left combines elements from my home and friends' homes into a composite room, where each corner holds a timeless interaction. The vibrant colors detach the viewer from my specific memories, inviting them to reflect on their own. The right portrays an imagined memory of a prom I never attended, rendered in vibrant pinks and deep purples. Faceless figures in elegant attire convey the surreal quality of an experience I could only dream of, while a single black-and-white figure with a blank cutout represents me: a shadow observing from afar, absent from the tangible reality of the scene."
+  ],
+  "related": [
+    "way-back-then",
+    "march-9th"
+  ],
+  "cover": "images/FvGYZiK6QpAEXkRj1JoOGeMS8k.png",
+  "images": [
+    {
+      "src": "images/FvGYZiK6QpAEXkRj1JoOGeMS8k.png",
+      "alt": ""
+    },
+    {
+      "src": "images/cB9aBobIxyYY1So4Jx1Nb5Md5YQ.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "images/nDlUkIRwoo5FULJ1vZiig3oEvic.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "images/jEkBuPvx3br08lcU44NY6fyWbzk.jpeg",
+      "alt": ""
+    },
+    {
+      "src": "images/9xi58cBYuigqeTIsxzL2SjnHPi8.jpeg",
+      "alt": ""
+    }
+  ],
+  "order": 8
+}

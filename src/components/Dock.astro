@@ -1,0 +1,34 @@
+---
+import { href, site } from "../lib/content";
+---
+
+<div class="dock" data-dock>
+  <div class="dock-panel">
+    <div class="dock-panel-inner">
+      <nav class="dock-links" aria-label="Menu">
+        {
+          site.menu.map((item) => (
+            <a href={href(item.href)}>{item.label}</a>
+          ))
+        }
+      </nav>
+      <div class="dock-sub">
+        <a href={`mailto:${site.emails.studio}`}>Send an email</a>
+        <a href={site.links.schedule} target="_blank" rel="noreferrer">Schedule a call</a>
+      </div>
+      <div class="dock-social">
+        <a href={site.links.x} target="_blank" rel="noreferrer">X</a>
+        <a href={site.links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href={site.links.instagram} target="_blank" rel="noreferrer">Instagram</a>
+      </div>
+    </div>
+  </div>
+  <div class="dock-bar">
+    <a class="dock-logo" href={href()}>angela.</a>
+    <button class="dock-toggle" type="button" data-dock-toggle aria-expanded="false" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</div>

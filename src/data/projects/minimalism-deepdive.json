@@ -1,0 +1,33 @@
+{
+  "slug": "minimalism-deepdive",
+  "title": "Minimalism Deepdive",
+  "year": "2025",
+  "medium": "Denim canvas, rope, brass",
+  "size": "23x30in",
+  "category": "3D",
+  "cover": "images/zl3WJlVlLxSOS9ibWiIo7sa2wcc.jpg",
+  "paragraphs": [
+    "Minimalism was always a style I claimed to dislike, until closer inspection revealed that my aversion was rooted in unfamiliarity rather than genuine critique. The piece engages with minimalism on its own terms, centering on three ideas: that it exists for itself rather than to tell a story, that all non-essential elements must be stripped away, and that form should follow utility. Its visual language draws from the repeated rectangular structures of Donald Judd, while rough edges and canvas material introduce evidence of touch and process that disrupt minimalism's usual neutrality. The piece functions both as a wall-mounted object and a versatile garment, transforming into a top, skirt, and bag: functional, self-contained, and human."
+  ],
+  "related": [
+    "between-skies",
+    "monochrome-exploration",
+    "self-reflections-or-lack-thereof",
+    "a-puzzle-of-nostalgia"
+  ],
+  "images": [
+    {
+      "src": "images/4S2HZeMH0y7MIuTVSm15O4Eh16E.jpg",
+      "alt": ""
+    },
+    {
+      "src": "images/4Lfxyw7w5o87VHzIfhTPW7AnxE.jpg",
+      "alt": ""
+    },
+    {
+      "src": "images/zl3WJlVlLxSOS9ibWiIo7sa2wcc.jpg",
+      "alt": ""
+    }
+  ],
+  "order": 1
+}

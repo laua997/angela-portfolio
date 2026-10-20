@@ -1,0 +1,29 @@
+{
+  "slug": "a-puzzle-of-nostalgia",
+  "title": "A Puzzle of Nostalgia",
+  "year": "2023",
+  "medium": "Magazines on paper",
+  "size": "24x18in",
+  "category": "2D",
+  "paragraphs": [
+    "Using magazine fragments, this piece constructs a hybrid self-portrait and landscape set in Hong Kong, drawing on the nostalgia of red taxis, bustling harbors, and drifting cityscapes. The shapes are intentionally organic and slightly awkward, referencing the activation-synthesis model of dreaming, where the brain pieces together random images into something surreal yet coherent. The resting figure sits suspended between the real and imagined, mirroring how dreams synthesize fragments of memory into a world of their own."
+  ],
+  "related": [
+    "self-reflections-or-lack-thereof",
+    "the-stars-in-my-sky",
+    "familiar-forms",
+    "midnight-snack"
+  ],
+  "cover": "images/qwYsGQvRbnmz7fU8p8Zhucqdx4.jpg",
+  "images": [
+    {
+      "src": "images/qwYsGQvRbnmz7fU8p8Zhucqdx4.jpg",
+      "alt": ""
+    },
+    {
+      "src": "images/epHFvxLcxNzzzvTUvO9Rw70sRlE.jpeg",
+      "alt": "Frizante 6"
+    }
+  ],
+  "order": 16
+}

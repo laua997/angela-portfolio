@@ -1,0 +1,35 @@
+---
+import Base from "../../layouts/Base.astro";
+import HeroNav from "../../components/HeroNav.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { getProjects } from "../../lib/content";
+
+const projects = getProjects();
+---
+
+<Base title="Projects - Angela Lau Portfolio">
+  <main id="main">
+    <section class="wrap hero">
+      <h1 class="appear appear-lg appear-d1">all artwork.</h1>
+      <div class="hero-side appear appear-d2">
+        <HeroNav />
+      </div>
+    </section>
+    <section class="wrap">
+      <div class="work-intro">
+        <p>what I do.</p>
+        <div class="filters" data-filters>
+          <span class="filter-label">filter by &gt;</span>
+          <button type="button" data-filter="Graphic Design" aria-pressed="false">graphic design</button>
+          <span>.</span>
+          <button type="button" data-filter="2D" aria-pressed="false">2d</button>
+          <span>.</span>
+          <button type="button" data-filter="3D" aria-pressed="false">3d</button>
+        </div>
+      </div>
+      <div class="work-grid">
+        {projects.map((project) => <div class="reveal"><ProjectCard project={project} showMeta /></div>)}
+      </div>
+    </section>
+  </main>
+</Base>

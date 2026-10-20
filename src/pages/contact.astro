@@ -1,0 +1,41 @@
+---
+import Base from "../layouts/Base.astro";
+import HeroNav from "../components/HeroNav.astro";
+import { site } from "../lib/content";
+---
+
+<Base title="Contact - Angela Lau Portfolio">
+  <main id="main">
+    <section class="wrap hero">
+      <h1 class="appear appear-lg appear-d1">contact.</h1>
+      <div class="hero-side appear appear-d2">
+        <HeroNav />
+        <p class="contact-lead">let's make something :)</p>
+      </div>
+    </section>
+    <form class="wrap form" data-contact-form data-email={site.emails.school}>
+      <label class="field">
+        <span>Name</span>
+        <input name="name" type="text" autocomplete="name" placeholder="Jane Smith" required />
+      </label>
+      <label class="field">
+        <span>Company</span>
+        <input name="company" type="text" autocomplete="organization" placeholder="e.g. Google" />
+      </label>
+      <label class="field">
+        <span>Budget (USD)</span>
+        <input name="budget" type="text" placeholder="e.g. $5000" />
+      </label>
+      <label class="field">
+        <span>Email</span>
+        <input name="email" type="email" autocomplete="email" placeholder="jane@framer.com" required />
+      </label>
+      <label class="field wide">
+        <span>Project Details</span>
+        <textarea name="details" placeholder="Message..." required></textarea>
+      </label>
+      <button class="send" type="submit">Send message</button>
+      <p class="form-note" data-form-note></p>
+    </form>
+  </main>
+</Base>

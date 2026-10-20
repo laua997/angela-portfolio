@@ -1,0 +1,52 @@
+---
+import Base from "../layouts/Base.astro";
+import HeroNav from "../components/HeroNav.astro";
+import { asset, site } from "../lib/content";
+---
+
+<Base title="About - Angela Lau Portfolio">
+  <main id="main">
+    <section class="wrap hero">
+      <div>
+        <button
+          class="funfact"
+          type="button"
+          data-funfact
+          data-facts={JSON.stringify(site.funFacts)}
+          aria-label="click me for a fun fact"
+        >
+          <span class="funfact-papers paper-grey"></span>
+          <span class="funfact-papers paper-mint"></span>
+          <span class="funfact-papers paper-pink"></span>
+          <span class="funfact-papers paper-white"></span>
+          <span class="funfact-sheet" data-fact></span>
+          <span class="funfact-folder" aria-hidden="true">
+            <svg viewBox="0 0 184 148" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 132 L172 132 L172 42 L68 42 L74 22 L10 22 Z" fill="#2e2e2e" />
+              <path d="M10 132 L172 132 L172 58 L10 58 Z" fill="#121212" />
+            </svg>
+          </span>
+          <span class="funfact-label">click me<br />for a fun fact.</span>
+        </button>
+        <h1 class="appear appear-lg appear-d1">about.</h1>
+      </div>
+      <div class="hero-side appear appear-d2">
+        <HeroNav />
+        <p class="about-quote">
+          {site.about.quote[0]}<br />
+          {site.about.quote[1]}
+        </p>
+      </div>
+    </section>
+    <section class="wrap about-grid">
+      <img class="reveal" src={asset(site.portrait.src)} alt={site.portrait.alt} />
+      <div class="about-copy reveal">
+        {site.about.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        <div class="about-links">
+          <a class="text-link pink" href={site.links.resume} target="_blank" rel="noreferrer">resume</a>
+          <a class="text-link pink" href={site.links.linkedin} target="_blank" rel="noreferrer">linkedin</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Base>

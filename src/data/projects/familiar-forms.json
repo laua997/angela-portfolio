@@ -1,0 +1,25 @@
+{
+  "slug": "familiar-forms",
+  "title": "Familiar Forms",
+  "year": "2022",
+  "medium": "Charcoal on paper",
+  "size": "24x18in",
+  "category": "2D",
+  "paragraphs": [
+    "A charcoal still life of a few items I used daily at the time, rendered with equal attention to reflect how personally significant each one was. The variety of textures—smooth surfaces, transparent plastic, creased fabric—was a deliberate challenge. The purple hair clip, always with me at school, and the cat photo holder, holding polaroids of friends, make this a snapshot of a specific moment in my past."
+  ],
+  "related": [
+    "monochrome-exploration",
+    "the-stars-in-my-sky",
+    "between-skies",
+    "midnight-snack"
+  ],
+  "cover": "images/e3EmiQOeypGN8IeDKcOWSj7qc4.jpg",
+  "images": [
+    {
+      "src": "images/e3EmiQOeypGN8IeDKcOWSj7qc4.jpg",
+      "alt": ""
+    }
+  ],
+  "order": 17
+}

@@ -1,0 +1,72 @@
+---
+import Base from "../../layouts/Base.astro";
+import HeroNav from "../../components/HeroNav.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+import { asset, getProject, getProjects, projectHeading } from "../../lib/content";
+
+export function getStaticPaths() {
+  return getProjects().map((project) => ({
+    params: { slug: project.slug },
+  }));
+}
+
+const { slug } = Astro.params;
+const project = getProject(slug!);
+if (!project) {
+  throw new Error(`Missing project ${slug}`);
+}
+const related = project.related
+  .map((id) => getProject(id))
+  .filter((item): item is NonNullable<typeof item> => Boolean(item));
+const title = `${project.title} - Angela Lau Portfolio`;
+---
+
+<Base title={title} description={project.paragraphs[0]}>
+  <main id="main">
+    <section class="wrap hero">
+      <h1 class="appear appear-lg appear-d1">{projectHeading(project)}</h1>
+      <div class="hero-side appear appear-d2">
+        <HeroNav />
+      </div>
+    </section>
+    <section class="wrap project-body">
+      <div class="gallery">
+        {
+          project.images.map((image) => (
+            <img class="reveal" src={asset(image.src)} alt={image.alt || project.title} />
+          ))
+        }
+      </div>
+      <div class="overview">
+        <h2 class="reveal">project overview</h2>
+        <dl class="meta reveal">
+          <dt>Year</dt>
+          <dd>{project.year}</dd>
+          <dt>Medium</dt>
+          <dd>{project.medium}</dd>
+          <dt>Size</dt>
+          <dd>{project.size}</dd>
+          <dt>Category</dt>
+          <dd>{project.category}</dd>
+        </dl>
+        <div class="summary reveal">
+          {project.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+        </div>
+      </div>
+    </section>
+    {
+      related.length > 0 && (
+        <section class="wrap related">
+          <h2>related projects</h2>
+          <div class="related-grid">
+            {related.map((item) => (
+              <div class="reveal">
+                <ProjectCard project={item} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )
+    }
+  </main>
+</Base>
