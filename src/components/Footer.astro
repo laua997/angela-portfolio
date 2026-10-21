@@ -1,5 +1,5 @@
 ---
-import { site } from "../lib/content";
+import { asset, site } from "../lib/content";
 ---
 
 <footer class="footer">
@@ -14,7 +14,7 @@ import { site } from "../lib/content";
         <a href={site.links.linkedin} target="_blank" rel="noreferrer">linkedin</a>
       </div>
       <div class="footer-col">
-        <a href={site.links.resume} target="_blank" rel="noreferrer">resume</a>
+        <a href={asset(site.links.resume)} target="_blank" rel="noreferrer">resume</a>
       </div>
     </div>
   </div>
