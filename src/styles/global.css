@@ -200,7 +200,7 @@ h2, .section-title {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   column-gap: var(--gap);
-  row-gap: 256px;
+  row-gap: 128px;
   align-items: stretch;
 }
 
