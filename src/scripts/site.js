@@ -26,8 +26,11 @@ function initCursor() {
   document.body.appendChild(logoEl);
   document.body.appendChild(exploreEl);
 
-  const logo = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 };
-  const explore = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 };
+  // One follow for both. Stiffness 500 and damping 60 are the explore
+  // label's spring; the logo used to be a stiffer 529/40 and lagged less.
+  const follow = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 };
+  const STIFFNESS = 500;
+  const DAMPING = 60;
   let mode = "logo";
   let visible = false;
   let ready = false;
@@ -48,12 +51,12 @@ function initCursor() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     const clamp = (value, size, limit) => Math.max(0, Math.min(value, Math.max(0, limit - size)));
-    logoEl.style.left = `${clamp(logo.x + LOGO_X, 43, vw)}px`;
-    logoEl.style.top = `${clamp(logo.y + LOGO_Y, 60, vh)}px`;
+    logoEl.style.left = `${clamp(follow.x + LOGO_X, 43, vw)}px`;
+    logoEl.style.top = `${clamp(follow.y + LOGO_Y, 60, vh)}px`;
     const exploreW = exploreEl.offsetWidth;
     const exploreH = exploreEl.offsetHeight;
-    const ex = clamp(explore.x + EXPLORE_X, exploreW, vw);
-    const ey = clamp(explore.y + EXPLORE_Y, exploreH, vh);
+    const ex = clamp(follow.x + EXPLORE_X, exploreW, vw);
+    const ey = clamp(follow.y + EXPLORE_Y, exploreH, vh);
     exploreEl.style.transform = `translate3d(${ex}px, ${ey}px, 0)`;
   };
 
@@ -87,9 +90,9 @@ function initCursor() {
     if (aimed) show();
   };
 
-  const stepSpring = (s, stiffness, damping, dt) => {
-    const ax = (-stiffness * (s.x - s.tx) - damping * s.vx) / 1;
-    const ay = (-stiffness * (s.y - s.ty) - damping * s.vy) / 1;
+  const stepSpring = (s, dt) => {
+    const ax = -STIFFNESS * (s.x - s.tx) - DAMPING * s.vx;
+    const ay = -STIFFNESS * (s.y - s.ty) - DAMPING * s.vy;
     s.vx += ax * dt;
     s.vy += ay * dt;
     s.x += s.vx * dt;
@@ -100,8 +103,7 @@ function initCursor() {
     if (failed) return;
     const dt = Math.min(0.032, (now - last) / 1000);
     last = now;
-    stepSpring(logo, 529, 40, dt);
-    stepSpring(explore, 500, 60, dt);
+    stepSpring(follow, dt);
     place();
     requestAnimationFrame(frame);
   };
@@ -109,14 +111,12 @@ function initCursor() {
 
   const aim = (x, y) => {
     aimed = true;
-    logo.tx = x;
-    logo.ty = y;
-    explore.tx = x;
-    explore.ty = y;
+    follow.tx = x;
+    follow.ty = y;
     if (!visible) {
-      logo.x = explore.x = x;
-      logo.y = explore.y = y;
-      logo.vx = logo.vy = explore.vx = explore.vy = 0;
+      follow.x = x;
+      follow.y = y;
+      follow.vx = follow.vy = 0;
       show();
     }
   };
