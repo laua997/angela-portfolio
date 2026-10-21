@@ -516,7 +516,7 @@ h2, .section-title {
 }
 .funfact.is-open .funfact-sheet { opacity: 1; transform: translateX(-50%) translateY(-78px); }
 
-.cursor {
+.cursor-logo, .cursor-explore {
   position: fixed;
   left: 0;
   top: 0;
@@ -524,21 +524,27 @@ h2, .section-title {
   pointer-events: none;
   opacity: 0;
 }
-.cursor.is-on { opacity: 1; }
 .cursor-logo {
-  position: absolute;
+  /* difference lives on the positioned element itself. A transform here
+     (or on a parent) isolates the blend, so the white mark never meets
+     the page and disappears on white. JS moves it with left/top. */
+  mix-blend-mode: difference;
+  transform: none;
+  width: 43px;
+  height: 60px;
+}
+.cursor-logo.is-on { opacity: 1; }
+.cursor-logo.is-explore { opacity: 0; }
+.cursor-logo img {
   width: 43px;
   max-width: none;
   height: 60px;
   object-fit: contain;
-  mix-blend-mode: difference;
-  transform: translate(5px, 5px);
+  display: block;
+  transform: none;
 }
 .cursor-explore {
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  transform: translate(-50%, 0);
+  z-index: 81;
   background: var(--pink);
   color: white;
   font-size: 18px;
@@ -546,10 +552,8 @@ h2, .section-title {
   line-height: 1.2;
   padding: 0 2px 0 1px;
   white-space: nowrap;
-  opacity: 0;
 }
-.cursor.is-explore .cursor-logo { opacity: 0; }
-.cursor.is-explore .cursor-explore { opacity: 1; }
+.cursor-explore.is-on.is-explore { opacity: 1; }
 html.has-cursor, html.has-cursor * { cursor: none !important; }
 
 .appear {
@@ -674,14 +678,14 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .appear, .reveal, .cursor, .funfact-papers, .funfact-sheet, .dock-panel a {
+  .appear, .reveal, .funfact-papers, .funfact-sheet, .dock-panel a {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;
     transform: none !important;
   }
   .dock { animation: none !important; transform: translateX(-50%) !important; opacity: 1 !important; }
-  .cursor { display: none !important; }
+  .cursor-logo, .cursor-explore { display: none !important; }
   html.has-cursor, html.has-cursor * { cursor: auto !important; }
   .dock.is-hidden { transform: translateX(-50%); opacity: 1; pointer-events: auto; }
   ::view-transition-old(root),
