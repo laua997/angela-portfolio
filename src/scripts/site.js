@@ -216,20 +216,6 @@ function initFilters() {
   });
 }
 
-function initFunFact() {
-  const widget = document.querySelector("[data-funfact]");
-  if (!widget) return;
-  const facts = JSON.parse(widget.getAttribute("data-facts") || "[]");
-  const sheet = widget.querySelector("[data-fact]");
-  let index = 0;
-  widget.addEventListener("click", () => {
-    if (!facts.length || !sheet) return;
-    sheet.textContent = facts[index % facts.length];
-    index += 1;
-    widget.classList.add("is-open");
-  });
-}
-
 function initForm() {
   const form = document.querySelector("[data-contact-form]");
   if (!form) return;
@@ -254,5 +240,4 @@ initCursor();
 initDock();
 initReveal();
 initFilters();
-initFunFact();
 initForm();

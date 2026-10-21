@@ -62,4 +62,4 @@ The next push to `main` (or a manual run of the “Deploy to GitHub Pages” wor
 
 ## What was carried over
 
-Pages: home, projects (all 18 works), about, and contact. Images and the Uncut Sans file used on the Framer site are stored in the repo. The floating menu, logo cursor, “explore project” hover cursor, scroll-in fades, menu open/close, about-page fun-fact folder, and a short crossfade between pages follow the original timing. `prefers-reduced-motion` turns the follower and motion off.
+Pages: home, projects (all 18 works), about, and contact. Images and the Uncut Sans file used on the Framer site are stored in the repo. The floating menu, logo cursor, “explore project” hover cursor, scroll-in fades, menu open/close, and a short crossfade between pages follow the original timing. `prefers-reduced-motion` turns the follower and motion off.
