@@ -31,6 +31,17 @@ export function page(path = ""): string {
   return url.endsWith("/") ? url : `${url}/`;
 }
 
+export function isCurrent(pathname: string, hrefPath: string): boolean {
+  const current = pathname.replace(/\/$/, "") || "/";
+  const homePath = page("").replace(/\/$/, "");
+  const url = page(hrefPath).replace(/\/$/, "") || "/";
+  return (
+    url === current ||
+    (hrefPath === "" && current === homePath) ||
+    (hrefPath === "projects" && (current === url || current.startsWith(`${url}/`)))
+  );
+}
+
 export function asset(path: string): string {
   return href(path);
 }
