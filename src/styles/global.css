@@ -12,7 +12,8 @@
   --paper: #ffffff;
   --ash: #f2f2f2;
   --bar: #cccccc;
-  --pink: #ff1493;
+  --accent: #ff1493;
+  --pink: var(--accent);
   --ease-out: cubic-bezier(0.43, 0.01, 0.6, 0.99);
   --ease-in-out: cubic-bezier(0.44, 0, 0.56, 1);
   --ease-page: cubic-bezier(0.27, 0, 0.51, 1);
@@ -110,7 +111,7 @@ h2, .section-title {
   letter-spacing: -0.02em;
 }
 
-.hero-nav a, .text-link {
+.hero-nav a, .text-link, .footer a, .dock-panel a {
   position: relative;
 }
 .hero-nav a::after, .text-link::after, .footer a::after, .dock-panel a::after {
@@ -120,16 +121,15 @@ h2, .section-title {
   bottom: -2px;
   width: 100%;
   height: 1px;
+  background: var(--accent);
+  transform-origin: left;
+}
+.dock-panel a::after {
   background: currentColor;
   transform: scaleX(0);
-  transform-origin: left;
   transition: transform 0.3s var(--ease-in-out);
 }
-.hero-nav a:hover::after,
-.text-link:hover::after,
-.footer a:hover::after,
-.dock-panel a:hover::after,
-.hero-nav a[aria-current="page"]::after {
+.dock-panel a:hover::after {
   transform: scaleX(1);
 }
 
