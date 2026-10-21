@@ -1,5 +1,5 @@
 ---
-import { href, site } from "../lib/content";
+import { page, site } from "../lib/content";
 ---
 
 <div class="dock" data-dock>
@@ -8,7 +8,7 @@ import { href, site } from "../lib/content";
       <nav class="dock-links" aria-label="Menu">
         {
           site.menu.map((item) => (
-            <a href={href(item.href)}>{item.label}</a>
+            <a href={page(item.href)}>{item.label}</a>
           ))
         }
       </nav>
@@ -24,7 +24,7 @@ import { href, site } from "../lib/content";
     </div>
   </div>
   <div class="dock-bar">
-    <a class="dock-logo" href={href()}>angela.</a>
+    <a class="dock-logo" href={page()}>angela.</a>
     <button class="dock-toggle" type="button" data-dock-toggle aria-expanded="false" aria-label="Menu">
       <span></span>
       <span></span>
