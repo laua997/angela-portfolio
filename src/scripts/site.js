@@ -246,8 +246,28 @@ function initForm() {
   });
 }
 
+function initFeaturedRows() {
+  const grid = document.querySelector(".featured-grid");
+  const anchor = grid?.querySelector(".place-vis");
+  if (!grid || !anchor) return;
+  const desktop = window.matchMedia("(min-width: 1101px)");
+  const apply = () => {
+    grid.style.gridTemplateRows = "";
+    if (!desktop.matches) return;
+    const height = Math.round(anchor.getBoundingClientRect().height);
+    if (height > 0) grid.style.gridTemplateRows = `${height}px ${height}px`;
+  };
+  apply();
+  desktop.addEventListener("change", apply);
+  window.addEventListener("resize", apply);
+  grid.querySelectorAll("img").forEach((img) => {
+    if (!img.complete) img.addEventListener("load", apply, { once: true });
+  });
+}
+
 initCursor();
 initDock();
 initReveal();
+initFeaturedRows();
 initFilters();
 initForm();
