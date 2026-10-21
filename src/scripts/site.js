@@ -35,14 +35,24 @@ function initCursor() {
   let aimed = false;
   let last = performance.now();
 
+  // Top-left trails the pointer tip: far enough down and right that the
+  // system arrow (drawn from that tip) never sits on the mark.
+  const OFFSET_X = 16;
+  const OFFSET_Y = 24;
   const place = () => {
     // left/top, not transform: a transform on this element promotes a
     // composited layer and Chrome stops difference-blending it (the white
     // mark stays white). A transformed parent does the same to a child.
-    // CSS margins shift the box so its centre sits on the pointer.
-    logoEl.style.left = `${logo.x}px`;
-    logoEl.style.top = `${logo.y}px`;
-    exploreEl.style.transform = `translate3d(${explore.x}px, ${explore.y}px, 0) translate(-50%, -50%)`;
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const clamp = (value, size, limit) => Math.max(0, Math.min(value, Math.max(0, limit - size)));
+    logoEl.style.left = `${clamp(logo.x + OFFSET_X, 43, vw)}px`;
+    logoEl.style.top = `${clamp(logo.y + OFFSET_Y, 60, vh)}px`;
+    const exploreW = exploreEl.offsetWidth;
+    const exploreH = exploreEl.offsetHeight;
+    const ex = clamp(explore.x + OFFSET_X, exploreW, vw);
+    const ey = clamp(explore.y + OFFSET_Y, exploreH, vh);
+    exploreEl.style.transform = `translate3d(${ex}px, ${ey}px, 0)`;
   };
 
   const drop = () => {
