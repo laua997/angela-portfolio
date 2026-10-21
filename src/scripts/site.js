@@ -6,18 +6,72 @@ function initCursor() {
   const root = document.documentElement;
   const src = document.body.dataset.cursor;
   if (!src) return;
-  root.classList.add("has-cursor");
-  const el = document.createElement("div");
-  el.className = "cursor";
-  el.setAttribute("aria-hidden", "true");
-  el.innerHTML = `<img class="cursor-logo" alt="" src="${src}" /><span class="cursor-explore">explore project</span>`;
-  document.body.appendChild(el);
+
+  const logoEl = document.createElement("div");
+  logoEl.className = "cursor-logo";
+  logoEl.setAttribute("aria-hidden", "true");
+  const img = document.createElement("img");
+  img.alt = "";
+  img.draggable = false;
+  logoEl.appendChild(img);
+
+  const exploreEl = document.createElement("div");
+  exploreEl.className = "cursor-explore";
+  exploreEl.textContent = "explore project";
+  exploreEl.setAttribute("aria-hidden", "true");
+
+  document.body.appendChild(logoEl);
+  document.body.appendChild(exploreEl);
 
   const logo = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 };
   const explore = { x: 0, y: 0, vx: 0, vy: 0, tx: 0, ty: 0 };
   let mode = "logo";
   let visible = false;
+  let ready = false;
+  let failed = false;
+  let aimed = false;
   let last = performance.now();
+
+  const place = () => {
+    // left/top, not transform: a transform on this element promotes a
+    // composited layer and Chrome stops difference-blending it (the white
+    // mark stays white). A transformed parent does the same to a child.
+    logoEl.style.left = `${logo.x + 5}px`;
+    logoEl.style.top = `${logo.y + 5}px`;
+    exploreEl.style.transform = `translate3d(${explore.x + 20}px, ${explore.y + 20}px, 0) translate(-50%, 0)`;
+  };
+
+  const drop = () => {
+    failed = true;
+    ready = false;
+    visible = false;
+    root.classList.remove("has-cursor");
+    logoEl.remove();
+    exploreEl.remove();
+  };
+
+  const show = () => {
+    if (failed || !ready || visible) return;
+    if (getComputedStyle(logoEl).mixBlendMode !== "difference") {
+      drop();
+      return;
+    }
+    visible = true;
+    place();
+    logoEl.classList.add("is-on");
+    exploreEl.classList.add("is-on");
+    root.classList.add("has-cursor");
+  };
+
+  const arm = () => {
+    if (failed) return;
+    if (!img.naturalWidth) {
+      drop();
+      return;
+    }
+    ready = true;
+    if (aimed) show();
+  };
 
   const stepSpring = (s, stiffness, damping, dt) => {
     const ax = (-stiffness * (s.x - s.tx) - damping * s.vx) / 1;
@@ -29,17 +83,18 @@ function initCursor() {
   };
 
   const frame = (now) => {
+    if (failed) return;
     const dt = Math.min(0.032, (now - last) / 1000);
     last = now;
     stepSpring(logo, 529, 40, dt);
     stepSpring(explore, 500, 60, dt);
-    const pos = mode === "explore" ? explore : logo;
-    el.style.transform = `translate3d(${pos.x}px, ${pos.y}px, 0)`;
+    place();
     requestAnimationFrame(frame);
   };
   requestAnimationFrame(frame);
 
   const aim = (x, y) => {
+    aimed = true;
     logo.tx = x;
     logo.ty = y;
     explore.tx = x;
@@ -47,23 +102,34 @@ function initCursor() {
     if (!visible) {
       logo.x = explore.x = x;
       logo.y = explore.y = y;
-      visible = true;
-      el.classList.add("is-on");
+      logo.vx = logo.vy = explore.vx = explore.vy = 0;
+      show();
     }
   };
 
+  img.addEventListener("load", arm);
+  img.addEventListener("error", drop);
+  img.src = src;
+  if (img.complete) arm();
+
   window.addEventListener("mousemove", (event) => {
+    if (failed) return;
     aim(event.clientX, event.clientY);
     const target = event.target instanceof Element ? event.target.closest("[data-cursor='explore']") : null;
     const next = target ? "explore" : "logo";
     if (next !== mode) {
       mode = next;
-      el.classList.toggle("is-explore", mode === "explore");
+      logoEl.classList.toggle("is-explore", mode === "explore");
+      exploreEl.classList.toggle("is-explore", mode === "explore");
     }
   });
-  document.addEventListener("mouseleave", () => {
+  root.addEventListener("mouseleave", () => {
+    if (failed) return;
     visible = false;
-    el.classList.remove("is-on");
+    logoEl.classList.remove("is-on", "is-explore");
+    exploreEl.classList.remove("is-on", "is-explore");
+    root.classList.remove("has-cursor");
+    mode = "logo";
   });
 }
 
