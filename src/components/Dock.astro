@@ -8,21 +8,15 @@ import { isCurrent, page, site } from "../lib/content";
       <nav class="dock-links" aria-label="Menu">
         {
           site.menu.map((item) => {
-            const active = item.label !== "News" && isCurrent(Astro.url.pathname, item.href);
+            const active = isCurrent(Astro.url.pathname, item.href);
             return (
               <a class="slide-link" data-label={item.label} href={page(item.href)} aria-current={active ? "page" : undefined}>{item.label}</a>
             );
           })
         }
       </nav>
-      <div class="dock-sub">
-        <a href={`mailto:${site.emails.studio}`}>Send an email</a>
-        <a href={site.links.schedule} target="_blank" rel="noreferrer">Schedule a call</a>
-      </div>
       <div class="dock-social">
-        <a href={site.links.x} target="_blank" rel="noreferrer">X</a>
         <a href={site.links.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href={site.links.instagram} target="_blank" rel="noreferrer">Instagram</a>
       </div>
     </div>
   </div>
