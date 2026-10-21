@@ -1,7 +1,7 @@
 @font-face {
   font-family: "Uncut Sans";
   src: url("../assets/uncut-sans.woff2") format("woff2");
-  font-weight: 100 1000;
+  font-weight: 300 700;
   font-style: normal;
   font-display: swap;
 }
@@ -61,7 +61,9 @@ p, h1, h2, h3 { margin: 0; }
 }
 
 h1, .display {
-  font-weight: 400;
+  font-weight: 700;
+  font-variation-settings: "wght" 700;
+  font-synthesis: none;
   font-size: clamp(64px, 7.8vw, 112px);
   letter-spacing: -0.05em;
   line-height: 1.11;
@@ -70,7 +72,9 @@ h1, .display {
 }
 
 h2, .section-title {
-  font-weight: 1000;
+  font-weight: 700;
+  font-variation-settings: "wght" 700;
+  font-synthesis: none;
   font-size: clamp(32px, 2.8vw, 40px);
   letter-spacing: -0.04em;
   line-height: 1.2;
@@ -213,7 +217,9 @@ h2, .section-title {
 }
 .footer h2 {
   font-size: clamp(64px, 7vw, 104px);
-  font-weight: 1000;
+  font-weight: 700;
+  font-variation-settings: "wght" 700;
+  font-synthesis: none;
   letter-spacing: -0.05em;
   line-height: 1;
   text-transform: lowercase;
@@ -385,7 +391,14 @@ h2, .section-title {
   justify-content: space-between;
   padding: 0 24px;
 }
-.dock-logo { font-size: 20px; letter-spacing: -0.03em; line-height: 1.2; }
+.dock-logo {
+  font-size: 20px;
+  font-weight: 400;
+  font-variation-settings: "wght" 400;
+  font-synthesis: none;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+}
 .dock-toggle {
   width: 40px;
   height: 16px;
