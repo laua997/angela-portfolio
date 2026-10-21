@@ -35,10 +35,12 @@ function initCursor() {
   let aimed = false;
   let last = performance.now();
 
-  // Top-left trails the pointer tip: far enough down and right that the
-  // system arrow (drawn from that tip) never sits on the mark.
-  const OFFSET_X = 16;
-  const OFFSET_Y = 24;
+  // Top-left of each follower, measured from the pointer tip. The mark sits
+  // closer than the explore label, still clear of the arrow.
+  const LOGO_X = 8;
+  const LOGO_Y = 14;
+  const EXPLORE_X = 16;
+  const EXPLORE_Y = 24;
   const place = () => {
     // left/top, not transform: a transform on this element promotes a
     // composited layer and Chrome stops difference-blending it (the white
@@ -46,12 +48,12 @@ function initCursor() {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     const clamp = (value, size, limit) => Math.max(0, Math.min(value, Math.max(0, limit - size)));
-    logoEl.style.left = `${clamp(logo.x + OFFSET_X, 43, vw)}px`;
-    logoEl.style.top = `${clamp(logo.y + OFFSET_Y, 60, vh)}px`;
+    logoEl.style.left = `${clamp(logo.x + LOGO_X, 43, vw)}px`;
+    logoEl.style.top = `${clamp(logo.y + LOGO_Y, 60, vh)}px`;
     const exploreW = exploreEl.offsetWidth;
     const exploreH = exploreEl.offsetHeight;
-    const ex = clamp(explore.x + OFFSET_X, exploreW, vw);
-    const ey = clamp(explore.y + OFFSET_Y, exploreH, vh);
+    const ex = clamp(explore.x + EXPLORE_X, exploreW, vw);
+    const ey = clamp(explore.y + EXPLORE_Y, exploreH, vh);
     exploreEl.style.transform = `translate3d(${ex}px, ${ey}px, 0)`;
   };
 
