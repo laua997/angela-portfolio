@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import { href } from "../lib/content";
+import { page } from "../lib/content";
 ---
 
 <Base title="Page not found - Angela Lau Portfolio">
@@ -8,7 +8,7 @@ import { href } from "../lib/content";
     <div>
       <h1>missing.</h1>
       <p class="lede" style="margin-top: 16px;">That page isn't on this site.</p>
-      <p style="margin-top: 24px;"><a class="text-link" href={href()}>back home</a></p>
+      <p style="margin-top: 24px;"><a class="text-link" href={page()}>back home</a></p>
     </div>
   </main>
 </Base>

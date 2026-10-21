@@ -24,6 +24,13 @@ export function href(path = ""): string {
   return `${base}${path.replace(/^\//, "")}`;
 }
 
+/** In-site pages. Always include the trailing slash so the click does not 301. */
+export function page(path = ""): string {
+  const url = href(path);
+  if (/^(https?:|mailto:|tel:)/.test(path)) return url;
+  return url.endsWith("/") ? url : `${url}/`;
+}
+
 export function asset(path: string): string {
   return href(path);
 }

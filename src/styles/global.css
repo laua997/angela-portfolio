@@ -100,6 +100,8 @@ h2, .section-title {
 .home-hero { padding-top: 180px; padding-bottom: 96px; min-height: 62vh; }
 
 .hero-side {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -109,33 +111,50 @@ h2, .section-title {
 }
 
 .hero-nav {
+  position: relative;
+  z-index: 2;
   display: flex;
   gap: 32px;
   font-size: 16px;
   letter-spacing: -0.02em;
 }
 
-.hero-nav a, .text-link, .footer a, .dock-panel a {
+.hero-nav a, .text-link, .footer a {
   position: relative;
+  z-index: 0;
+  display: inline-block;
+  transition: color 0.05s linear;
 }
-.hero-nav a::after, .text-link::after, .footer a::after, .dock-panel a::after {
+.hero-nav a::after, .text-link::after, .footer a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  z-index: -1;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  pointer-events: none;
+  transition: height 0.24s var(--ease-in-out);
+}
+.hero-nav a:hover, .text-link:hover, .footer a:hover { color: #fff; }
+.hero-nav a:hover::after, .text-link:hover::after, .footer a:hover::after {
+  height: calc(100% + 2px);
+}
+.dock-panel a { position: relative; }
+.dock-panel a::after {
   content: "";
   position: absolute;
   left: 0;
   bottom: -2px;
   width: 100%;
   height: 1px;
-  background: var(--accent);
-  transform-origin: left;
-}
-.dock-panel a::after {
   background: currentColor;
   transform: scaleX(0);
+  transform-origin: left;
   transition: transform 0.3s var(--ease-in-out);
 }
-.dock-panel a:hover::after {
-  transform: scaleX(1);
-}
+.dock-panel a:hover::after { transform: scaleX(1); }
 
 .featured { padding-bottom: 128px; }
 
@@ -521,7 +540,7 @@ h2, .section-title {
   left: 0;
   top: 0;
   z-index: 80;
-  pointer-events: none;
+  pointer-events: none !important;
   opacity: 0;
 }
 .cursor-logo {
@@ -542,6 +561,7 @@ h2, .section-title {
   object-fit: contain;
   display: block;
   transform: none;
+  pointer-events: none !important;
 }
 .cursor-explore {
   z-index: 81;
@@ -687,6 +707,11 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   .dock { animation: none !important; transform: translateX(-50%) !important; opacity: 1 !important; }
   .cursor-logo, .cursor-explore { display: none !important; }
   html.has-cursor, html.has-cursor * { cursor: auto !important; }
+  .hero-nav a, .text-link, .footer a,
+  .hero-nav a::after, .text-link::after, .footer a::after,
+  .dock-panel a::after {
+    transition: none !important;
+  }
   .dock.is-hidden { transform: translateX(-50%); opacity: 1; pointer-events: auto; }
   ::view-transition-old(root),
   ::view-transition-new(root) { animation: none !important; }

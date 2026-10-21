@@ -13,12 +13,15 @@ function initCursor() {
   const img = document.createElement("img");
   img.alt = "";
   img.draggable = false;
+  img.style.pointerEvents = "none";
+  logoEl.style.pointerEvents = "none";
   logoEl.appendChild(img);
 
   const exploreEl = document.createElement("div");
   exploreEl.className = "cursor-explore";
   exploreEl.textContent = "explore project";
   exploreEl.setAttribute("aria-hidden", "true");
+  exploreEl.style.pointerEvents = "none";
 
   document.body.appendChild(logoEl);
   document.body.appendChild(exploreEl);
