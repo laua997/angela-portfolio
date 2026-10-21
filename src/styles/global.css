@@ -204,9 +204,9 @@ h2, .section-title {
   align-items: stretch;
 }
 
-/* Each row is as tall as its widest card. Shorter cards hang from the top
-   of that row: centered, flush to the top, or inset, never pinned to the
-   bottom edge together. Offsets match the original Framer home grid. */
+/* Each row is as tall as the first row's wide card. Shorter cards use one
+   shared rhythm: centered in the row, or sitting low above a 128px inset.
+   The wide card in each row stays flush to the top. */
 .place-miya,
 .place-flow,
 .place-vis,
@@ -221,7 +221,10 @@ h2, .section-title {
 .place-miya { grid-column: 1; grid-row: 1; justify-content: center; padding-bottom: 128px; }
 .place-flow { grid-column: 2; grid-row: 1; justify-content: flex-end; padding-bottom: 128px; }
 .place-vis { grid-column: 3 / span 2; grid-row: 1; justify-content: flex-start; }
-.place-sym { grid-column: 1; grid-row: 2; justify-content: flex-start; padding-top: 128px; }
+/* Same rhythm as the row above: wide card anchors the top, the left card
+   rides the middle, the remaining card sits low. Row height is matched to
+   the first row in JS so these offsets have the same room to travel. */
+.place-sym { grid-column: 1; grid-row: 2; justify-content: center; padding-bottom: 128px; }
 .place-sen { grid-column: 2 / span 2; grid-row: 2; justify-content: flex-start; }
 .place-mar { grid-column: 4; grid-row: 2; justify-content: flex-end; padding-bottom: 128px; }
 
