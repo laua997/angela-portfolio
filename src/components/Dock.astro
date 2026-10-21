@@ -1,5 +1,5 @@
 ---
-import { page, site } from "../lib/content";
+import { isCurrent, page, site } from "../lib/content";
 ---
 
 <div class="dock" data-dock>
@@ -7,9 +7,12 @@ import { page, site } from "../lib/content";
     <div class="dock-panel-inner">
       <nav class="dock-links" aria-label="Menu">
         {
-          site.menu.map((item) => (
-            <a href={page(item.href)}>{item.label}</a>
-          ))
+          site.menu.map((item) => {
+            const active = item.label !== "News" && isCurrent(Astro.url.pathname, item.href);
+            return (
+              <a class="slide-link" data-label={item.label} href={page(item.href)} aria-current={active ? "page" : undefined}>{item.label}</a>
+            );
+          })
         }
       </nav>
       <div class="dock-sub">
