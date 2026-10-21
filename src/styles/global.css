@@ -517,11 +517,14 @@ h2, .section-title {
 .cursor-logo {
   /* difference lives on the positioned element itself. A transform here
      (or on a parent) isolates the blend, so the white mark never meets
-     the page and disappears on white. JS moves it with left/top. */
+     the page and disappears on white. JS moves the hotspot with left/top;
+     the negative margin centres the mark on that point. */
   mix-blend-mode: difference;
   transform: none;
   width: 43px;
   height: 60px;
+  margin-left: -21.5px;
+  margin-top: -30px;
 }
 .cursor-logo.is-on { opacity: 1; }
 .cursor-logo.is-explore { opacity: 0; }
@@ -545,7 +548,6 @@ h2, .section-title {
   white-space: nowrap;
 }
 .cursor-explore.is-on.is-explore { opacity: 1; }
-html.has-cursor, html.has-cursor * { cursor: none !important; }
 
 .appear {
   opacity: 0.001;
@@ -677,7 +679,6 @@ html.has-cursor, html.has-cursor * { cursor: none !important; }
   }
   .dock { animation: none !important; transform: translateX(-50%) !important; opacity: 1 !important; }
   .cursor-logo, .cursor-explore { display: none !important; }
-  html.has-cursor, html.has-cursor * { cursor: auto !important; }
   .text-link, .footer a,
   .text-link::after, .footer a::after,
   .slide-link::before, .slide-link::after,

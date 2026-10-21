@@ -39,16 +39,16 @@ function initCursor() {
     // left/top, not transform: a transform on this element promotes a
     // composited layer and Chrome stops difference-blending it (the white
     // mark stays white). A transformed parent does the same to a child.
-    logoEl.style.left = `${logo.x + 5}px`;
-    logoEl.style.top = `${logo.y + 5}px`;
-    exploreEl.style.transform = `translate3d(${explore.x + 20}px, ${explore.y + 20}px, 0) translate(-50%, 0)`;
+    // CSS margins shift the box so its centre sits on the pointer.
+    logoEl.style.left = `${logo.x}px`;
+    logoEl.style.top = `${logo.y}px`;
+    exploreEl.style.transform = `translate3d(${explore.x}px, ${explore.y}px, 0) translate(-50%, -50%)`;
   };
 
   const drop = () => {
     failed = true;
     ready = false;
     visible = false;
-    root.classList.remove("has-cursor");
     logoEl.remove();
     exploreEl.remove();
   };
@@ -63,7 +63,6 @@ function initCursor() {
     place();
     logoEl.classList.add("is-on");
     exploreEl.classList.add("is-on");
-    root.classList.add("has-cursor");
   };
 
   const arm = () => {
@@ -131,7 +130,6 @@ function initCursor() {
     visible = false;
     logoEl.classList.remove("is-on", "is-explore");
     exploreEl.classList.remove("is-on", "is-explore");
-    root.classList.remove("has-cursor");
     mode = "logo";
   });
 }
