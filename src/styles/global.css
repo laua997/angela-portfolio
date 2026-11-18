@@ -240,7 +240,10 @@ h2, .section-title {
 }
 .dock-sub a:hover::after, .dock-social a:hover::after { transform: scaleX(1); }
 
-.featured { padding-bottom: 128px; }
+.featured {
+  padding-top: clamp(40px, 5vw, 88px);
+  padding-bottom: 128px;
+}
 
 .featured-grid {
   display: grid;
