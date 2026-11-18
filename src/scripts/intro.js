@@ -233,7 +233,8 @@ function paintFinal(ctx, faceImg, scriptImg, nameEl) {
   ctx.font = `400 ${size}px Tangents, "Pixelify Sans", sans-serif`;
   ctx.textAlign = "center";
   ctx.textBaseline = "top";
-  ctx.fillText(nameEl.textContent || "ANGELA LAU.", STAGE_W / 2, top);
+  ctx.letterSpacing = "0px";
+  ctx.fillText(nameEl.textContent || "angela lau.", STAGE_W / 2, top);
   ctx.drawImage(scriptImg, 570, 544, 299, 61);
 }
 

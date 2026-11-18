@@ -747,8 +747,10 @@ h2, .section-title {
   .dock { display: none; }
 }
 
-/* Home — Desktop 3. Display words are set in capitals because Tangents draws
-   its uppercase in the lowercase-looking wordmark from the Figma frames. */
+/* Tangents text is stored in lowercase, matching the Figma frames.
+   Desktop 1 node 1:6 is Tangents Regular at 175.2px. Tracking and leading
+   follow that text style: 0 letter-spacing and the font's auto line height.
+   text-transform stays off so the lowercase glyphs are the ones that render. */
 .tangents {
   font-family: "Tangents", "Pixelify Sans", sans-serif;
   font-weight: 400;
@@ -756,8 +758,8 @@ h2, .section-title {
   font-synthesis: none;
   font-variation-settings: normal;
   text-transform: none;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
+  letter-spacing: 0;
+  line-height: normal;
 }
 
 .home-main {
@@ -778,7 +780,9 @@ h2, .section-title {
 .home-work { justify-self: start; padding-top: 6px; }
 .home-work-title {
   font-size: var(--home-display);
-  line-height: 0.88;
+  line-height: normal;
+  letter-spacing: 0;
+  text-transform: none;
   max-width: none;
   color: #000;
 }
@@ -833,8 +837,10 @@ h2, .section-title {
 h1.home-name {
   margin-top: 8px;
   font-size: var(--home-name);
-  line-height: 0.85;
-  letter-spacing: -0.045em;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+  text-transform: none;
   text-align: center;
   color: #000;
   max-width: none;
@@ -856,7 +862,9 @@ h1.home-name {
   padding-top: 6px;
   text-align: right;
   font-size: var(--home-display);
-  line-height: 0.9;
+  line-height: normal;
+  letter-spacing: 0;
+  text-transform: none;
   color: #000;
 }
 .home-nav a {
@@ -959,8 +967,10 @@ html.intro-arriving .home-name { opacity: 0; }
 .opener-name {
   margin: 0;
   font-size: 175.2px;
-  line-height: 0.9;
-  letter-spacing: -0.045em;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0;
+  text-transform: none;
   color: #000;
   white-space: nowrap;
   text-align: center;

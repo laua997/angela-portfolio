@@ -22,7 +22,7 @@ npm run preview
 
 ## Fonts
 
-Body copy uses Uncut Sans (`src/assets/uncut-sans.woff2`). Display type — the wordmark, “WORK”, and the home nav — is **Tangents**. That file is not in the repo. Drop `Tangents.woff2` or `Tangents.otf` into `public/fonts/` (both names are already wired with `@font-face`). Until then the page uses Pixelify Sans, a pixel fallback, so the capitals will not match the Figma wordmark.
+Body copy uses Uncut Sans (`src/assets/uncut-sans.woff2`). Display type — the wordmark, “work”, and the home nav — is **Tangents**, set in lowercase to match the Figma frames. That file is not in the repo. Drop `Tangents.woff2` or `Tangents.otf` into `public/fonts/` (both names are already wired with `@font-face`). Until then the page uses Pixelify Sans, a pixel fallback.
 
 ## Add or edit a project
 
