@@ -27,5 +27,5 @@ jobs:
           echo "dispatch status ${code}"
           cat /tmp/dispatch.json
           if [ "$code" != "204" ]; then
-            echo "Cross-repo dispatch was not accepted. The preview repo also rebuilds every 15 minutes."
+            echo "Cross-repo dispatch was not accepted. The preview repo rebuilds this branch every 5 minutes."
           fi
