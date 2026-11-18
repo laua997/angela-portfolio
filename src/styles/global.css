@@ -345,12 +345,13 @@ h2, .section-title {
 }
 .footer h2 {
   font-size: clamp(64px, 7vw, 104px);
-  font-weight: 700;
-  font-variation-settings: "wght" 700;
+  font-weight: 400;
+  font-style: normal;
   font-synthesis: none;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  text-transform: lowercase;
+  font-variation-settings: normal;
+  letter-spacing: 0;
+  line-height: normal;
+  text-transform: none;
   max-width: none;
 }
 .footer-links {
@@ -800,7 +801,7 @@ h2, .section-title {
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   align-items: start;
   column-gap: 20px;
-  padding-top: 28px;
+  padding-top: clamp(40px, 6vw, 96px);
   padding-bottom: 8px;
 }
 
@@ -882,6 +883,10 @@ h1.home-name {
 
 .home-nav {
   justify-self: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: clamp(18px, 0.5em, 32px);
   padding-top: 6px;
   text-align: right;
   font-size: var(--home-display);
@@ -892,6 +897,8 @@ h1.home-name {
 }
 .home-nav a {
   display: block;
+  width: fit-content;
+  margin-left: auto;
   color: inherit;
   transition: color 0.2s var(--ease-in-out);
 }
@@ -965,6 +972,49 @@ h1.home-name {
 }
 .home-card.is-hidden { display: none; }
 
+.home-awards { padding-bottom: 128px; }
+.home-awards-title {
+  font-size: clamp(40px, 4.5vw, 64px);
+  color: #000;
+  margin-bottom: 40px;
+}
+.home-awards-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #000;
+}
+.home-award {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 28px 0 24px;
+  border-top: 1px solid #000;
+  color: #000;
+  -webkit-tap-highlight-color: transparent;
+}
+.home-award-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 24px;
+}
+.home-award-prize {
+  font-size: clamp(28px, 2.4vw, 40px);
+  color: #000;
+  transition: color 0.2s var(--ease-in-out);
+}
+.home-award:hover .home-award-prize { color: #ff1493; }
+.home-award-date,
+.home-award-name,
+.home-award-detail {
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+.home-award-date { white-space: nowrap; text-align: right; }
+.home-award-detail { max-width: 42rem; }
+
 .opener {
   display: none;
   position: fixed;
@@ -982,16 +1032,19 @@ html.intro-settling .home-work,
 html.intro-settling .home-blurb,
 html.intro-settling .home-nav,
 html.intro-settling .featured,
+html.intro-settling .home-awards,
 html.intro-settling .home-face,
 html.intro-settling .home-name { opacity: 0; }
 html.intro-reveal .home-work,
 html.intro-reveal .home-blurb,
 html.intro-reveal .home-nav,
-html.intro-reveal .featured {
+html.intro-reveal .featured,
+html.intro-reveal .home-awards {
   animation: home-rise 0.72s cubic-bezier(0.65, 0, 0.35, 1) both;
 }
 html.intro-reveal .home-nav { animation-delay: 0.06s; }
-html.intro-reveal .featured { animation-delay: 0.14s; }
+html.intro-reveal .featured,
+html.intro-reveal .home-awards { animation-delay: 0.14s; }
 @keyframes home-rise {
   from { opacity: 0; transform: translateY(32px); }
   to { opacity: 1; transform: none; }
@@ -1080,7 +1133,7 @@ html.intro-reveal .featured { animation-delay: 0.14s; }
     flex-direction: column;
     align-items: center;
     gap: 28px;
-    padding-top: 72px;
+    padding-top: calc(46px + clamp(28px, 4vw, 40px));
     text-align: center;
   }
   .home-work, .home-nav { padding-top: 0; }
@@ -1108,6 +1161,9 @@ html.intro-reveal .featured { animation-delay: 0.14s; }
   }
   .home-col-offset { margin-top: 0; }
   .home-card img { border-radius: 16px; }
+  .home-awards { padding-bottom: 96px; }
+  .home-award-top { flex-wrap: wrap; }
+  .home-award-date { margin-left: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1116,6 +1172,7 @@ html.intro-reveal .featured { animation-delay: 0.14s; }
   html.intro-settling .home-blurb,
   html.intro-settling .home-nav,
   html.intro-settling .featured,
+  html.intro-settling .home-awards,
   html.intro-settling .home-face,
   html.intro-settling .home-name { opacity: 1 !important; }
   html.intro-pending .opener,
@@ -1128,5 +1185,6 @@ html.intro-reveal .featured { animation-delay: 0.14s; }
   html.intro-reveal .home-work,
   html.intro-reveal .home-blurb,
   html.intro-reveal .home-nav,
-  html.intro-reveal .featured { animation: none !important; transition: none !important; transform: none !important; }
+  html.intro-reveal .featured,
+  html.intro-reveal .home-awards { animation: none !important; transition: none !important; transform: none !important; }
 }
