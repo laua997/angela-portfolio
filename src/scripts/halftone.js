@@ -1,4 +1,4 @@
-import { ACCENT, GLYPHS, PINK_ON_WHITE, hash, rasterTextCells, strokeOrder } from "./grid.js";
+import { ACCENT, GLYPHS, hash, rasterTextCells, strokeOrder } from "./grid.js";
 
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const LOOP_MS = 2600;
@@ -12,13 +12,10 @@ if (!reduce) {
     let state = states.get(link);
     if (state) return state;
     const dots = document.createElement("canvas");
-    const hi = document.createElement("canvas");
     dots.className = "halftone-dots";
-    hi.className = "halftone-hi";
     dots.setAttribute("aria-hidden", "true");
-    hi.setAttribute("aria-hidden", "true");
-    link.append(dots, hi);
-    state = { dots, hi, cells: [], path: [], cell: 8, built: "" };
+    link.append(dots);
+    state = { dots, cells: [], path: [], cell: 8, built: "" };
     states.set(link, state);
     return state;
   };
@@ -63,12 +60,10 @@ function build(link, state) {
   const fontSize = parseFloat(cs.fontSize) || 48;
   const cell = Math.max(6, Math.round(fontSize / 11));
   state.cell = cell;
-  for (const canvas of [state.dots, state.hi]) {
-    canvas.width = width;
-    canvas.height = height;
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-  }
+  state.dots.width = width;
+  state.dots.height = height;
+  state.dots.style.width = `${width}px`;
+  state.dots.style.height = `${height}px`;
   state.cells = rasterTextCells(label.textContent || "", font, width, height, cell);
   state.path = strokeOrder(state.cells);
 }
@@ -76,11 +71,9 @@ function build(link, state) {
 function draw(link, state, now) {
   if (!state.cells.length) build(link, state);
   const dots = state.dots.getContext("2d");
-  const hi = state.hi.getContext("2d");
   const width = link.clientWidth;
   const height = link.clientHeight;
   dots.clearRect(0, 0, width, height);
-  hi.clearRect(0, 0, width, height);
   const { cells, path, cell } = state;
   if (!cells.length) return;
   const tick = Math.floor(now / 50);
@@ -98,7 +91,13 @@ function draw(link, state, now) {
   for (let i = 0; i < cells.length; i += 1) {
     const item = cells[i];
     const strength = hot.get(`${item.x},${item.y}`) || 0;
-    if (strength > 0.35) continue;
+    if (strength > 0.35) {
+      dots.fillStyle = "#ffd6ea";
+      dots.fillRect(item.x, item.y, cell, cell);
+      dots.fillStyle = ACCENT;
+      dots.fillRect(item.x, item.y, cell - gap, cell - gap);
+      continue;
+    }
     const n = hash(i + 1, tick);
     const scramble = n % 9 === 0 || (strength > 0 && n % 3 === 0);
     if (scramble) {
@@ -110,12 +109,5 @@ function draw(link, state, now) {
     }
     dots.fillStyle = "#141414";
     dots.fillRect(item.x, item.y, cell - gap, cell - gap);
-  }
-  for (const [key, strength] of hot) {
-    if (strength <= 0.35) continue;
-    const [x, y] = key.split(",").map(Number);
-    const size = cell - gap + strength * 2;
-    hi.fillStyle = PINK_ON_WHITE;
-    hi.fillRect(x - (size - (cell - gap)) / 2, y - (size - (cell - gap)) / 2, size, size);
   }
 }
