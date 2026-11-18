@@ -22,7 +22,7 @@ npm run preview
 
 ## Fonts
 
-Body copy uses Uncut Sans (`src/assets/uncut-sans.woff2`). Display type — the wordmark, “work”, and the home nav — is **Tangents**, set in lowercase to match the Figma frames. That file is not in the repo. Drop `Tangents.woff2` or `Tangents.otf` into `public/fonts/` (both names are already wired with `@font-face`). Until then the page uses Pixelify Sans, a pixel fallback.
+Body copy uses Uncut Sans (`src/assets/uncut-sans.woff2`). Display type — the wordmark, “work”, the home nav, the awards heading, and the footer name — is **Tangents** (`public/fonts/Tangents.woff2` and `Tangents.ttf`), set in lowercase. Tangents only covers A–Z, a–z, space, and “?”. Other characters, including the period and “&”, use Uncut Sans.
 
 ## Add or edit a project
 

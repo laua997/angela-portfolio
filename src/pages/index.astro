@@ -20,32 +20,33 @@ const nameSvgs = ["images/name-v1.svg", "images/name-v2.svg", "images/name-v3.sv
       <canvas class="opener-canvas" data-opener-canvas width="1440" height="1024"></canvas>
       <DotPortrait class="opener-face" />
       <div class="opener-name-slot">
-        <p class="opener-name tangents" data-opener-name>angela lau.</p>
+        <p class="opener-name tangents" data-opener-name>ANGELA LAU.</p>
       </div>
       <img class="opener-script" data-opener-script src={asset("images/portfolio-script.svg")} alt="" />
     </div>
   </div>
 
   <main id="main" class="home-main">
-    <header class="home-top wrap">
-      <div class="home-work">
-        <h2 class="tangents home-work-title"><a class="halftone" href={page("projects")}><span class="halftone-label">work</span></a></h2>
-      </div>
-
-      <div class="home-identity">
-        <p class="home-blurb home-blurb-left">artist. a fan of all things creative.</p>
-        <div class="home-mark">
-          <DotPortrait class="home-face" />
-          <h1 class="tangents home-name" data-home-name>angela lau.</h1>
+    <header class="home-figma">
+      <div class="home-figma-stage">
+        <div class="home-work">
+          <h2 class="tangents home-work-title"><a class="halftone" href={page("projects")}><span class="halftone-label">work</span></a></h2>
         </div>
+        <nav class="home-filters" aria-label="Work">
+          <a href={page("projects")}>all</a>
+          <a href={page("projects")}>fine art</a>
+          <a href={page("projects")}>events</a>
+        </nav>
+        <p class="home-blurb home-blurb-left">artist. a fan of all things creative.</p>
+        <DotPortrait class="home-face" />
+        <h1 class="tangents home-name" data-home-name>ANGELA LAU.</h1>
         <p class="home-blurb home-blurb-right">aspiring creative director.</p>
+        <nav class="home-nav tangents" aria-label="Primary">
+          <a class="halftone" href={page("about")}><span class="halftone-label">about</span></a>
+          <a class="halftone" href={page("contact")}><span class="halftone-label">contact</span></a>
+          <a href={site.links.linkedin} target="_blank" rel="noreferrer">linkedin</a>
+        </nav>
       </div>
-
-      <nav class="home-nav tangents" aria-label="Primary">
-        <a class="halftone" href={page("about")}><span class="halftone-label">about</span></a>
-        <a class="halftone" href={page("contact")}><span class="halftone-label">contact</span></a>
-        <a href={site.links.linkedin} target="_blank" rel="noreferrer">linkedin</a>
-      </nav>
     </header>
 
     <div class="wrap featured">

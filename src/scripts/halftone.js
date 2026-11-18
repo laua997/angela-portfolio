@@ -51,7 +51,7 @@ function build(link, state) {
   const label = link.querySelector(".halftone-label");
   if (!label) return;
   const cs = getComputedStyle(label);
-  const font = `400 ${cs.fontSize} "Pixelify Sans", ${cs.fontFamily}`;
+  const font = `400 ${cs.fontSize} ${cs.fontFamily}`;
   const width = Math.max(1, link.clientWidth);
   const height = Math.max(1, link.clientHeight);
   const key = `${font}|${label.textContent}|${width}x${height}`;

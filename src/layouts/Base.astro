@@ -12,7 +12,7 @@ interface Props {
 const { title = site.title, description = site.description } = Astro.props;
 const path = Astro.url.pathname;
 const tangentsWoff = asset("fonts/Tangents.woff2");
-const tangentsOtf = asset("fonts/Tangents.otf");
+const tangentsTtf = asset("fonts/Tangents.ttf");
 ---
 
 <!doctype html>
@@ -28,15 +28,15 @@ const tangentsOtf = asset("fonts/Tangents.otf");
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <link rel="canonical" href={new URL(path, Astro.site)} />
-    <script is:inline define:vars={{ tangentsWoff, tangentsOtf }}>
+    <script is:inline define:vars={{ tangentsWoff, tangentsTtf }}>
       (function () {
         var style = document.createElement("style");
         style.textContent =
           '@font-face{font-family:"Tangents";src:url("' +
           tangentsWoff +
           '") format("woff2"),url("' +
-          tangentsOtf +
-          '") format("opentype");font-weight:400;font-style:normal;font-display:swap;}';
+          tangentsTtf +
+          '") format("truetype");font-weight:400;font-style:normal;font-display:swap;}';
         document.head.appendChild(style);
         try {
           var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

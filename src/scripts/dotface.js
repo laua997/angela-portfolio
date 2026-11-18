@@ -8,10 +8,8 @@ const BLEND_K = 2.4;
 let loading = null;
 let anim = null;
 const instances = [];
-let targetYaw = 0;
-let curYaw = 0;
-let targetPitch = 0;
-let curPitch = 0;
+let pointerX = window.innerWidth / 2;
+let pointerY = window.innerHeight / 2;
 let last = 0;
 let raf = 0;
 let listening = false;
@@ -37,49 +35,48 @@ function prepare(data) {
 }
 
 function loadData(url) {
-  if (window.DOTFACE_ANIM) return Promise.resolve(prepare(window.DOTFACE_ANIM));
   if (!loading) {
-    loading = new Promise((resolve, reject) => {
-      const script = document.createElement("script");
-      script.src = url;
-      script.async = true;
-      script.onload = () => {
-        if (!window.DOTFACE_ANIM) {
-          reject(new Error("dotface frames missing"));
-          return;
-        }
-        resolve(prepare(window.DOTFACE_ANIM));
-      };
-      script.onerror = () => reject(new Error("dotface frames failed"));
-      document.head.appendChild(script);
-    });
+    const posesUrl = url.replace(/frames\.js(\?.*)?$/, "poses.json");
+    loading = (async () => {
+      if (!window.DOTFACE_ANIM) {
+        await new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = url;
+          script.async = true;
+          script.onload = () => resolve();
+          script.onerror = () => reject(new Error("dotface frames failed"));
+          document.head.appendChild(script);
+        });
+      }
+      if (!window.DOTFACE_ANIM) throw new Error("dotface frames missing");
+      const data = prepare(window.DOTFACE_ANIM);
+      const poses = await fetch(posesUrl).then((response) => {
+        if (!response.ok) throw new Error("dotface poses failed");
+        return response.json();
+      });
+      const list = Array.isArray(poses)
+        ? poses
+        : Object.keys(poses)
+            .sort((a, b) => Number(a) - Number(b))
+            .map((key) => poses[key]);
+      data.frames.forEach((frame, index) => {
+        const pose = list[index];
+        frame._gx = pose?.grid_x ?? 0;
+        frame._gy = pose?.grid_y ?? 0;
+      });
+      return data;
+    })();
   }
   return loading;
 }
 
-function mapAxis(u, minV, maxV) {
-  u = Math.max(-1, Math.min(1, u));
-  return u < 0 ? -u * minV : u * maxV;
-}
-
-function spans(data) {
-  return {
-    yawSpan: Math.max(1e-6, data.yaw_max - data.yaw_min),
-    pitchSpan: Math.max(1e-6, data.pitch_max - data.pitch_min),
-  };
-}
-
-function nearestTwo(data, yaw, pitch) {
-  const { yawSpan, pitchSpan } = spans(data);
+function nearestTwo(frames, gx, gy) {
   let i1 = 0;
   let i2 = 0;
   let d1 = Infinity;
   let d2 = Infinity;
-  const frames = data.frames;
   for (let i = 0; i < frames.length; i++) {
-    const dy = (frames[i].yaw - yaw) / yawSpan;
-    const dp = (frames[i].pitch - pitch) / pitchSpan;
-    const d = Math.hypot(dy, dp);
+    const d = Math.hypot((frames[i]._gx ?? 0) - gx, (frames[i]._gy ?? 0) - gy);
     if (d < d1) {
       d2 = d1;
       i2 = i1;
@@ -93,11 +90,8 @@ function nearestTwo(data, yaw, pitch) {
   return [i1, i2, d1, d2];
 }
 
-function poseDist(data, a, b) {
-  const { yawSpan, pitchSpan } = spans(data);
-  const dy = (a.yaw - b.yaw) / yawSpan;
-  const dp = (a.pitch - b.pitch) / pitchSpan;
-  return Math.hypot(dy, dp);
+function poseDist(a, b) {
+  return Math.hypot((a._gx ?? 0) - (b._gx ?? 0), (a._gy ?? 0) - (b._gy ?? 0));
 }
 
 function metrics(data, disp) {
@@ -167,7 +161,7 @@ function drawInstance(inst) {
   const canvas = inst.canvas;
   if (!canvas.isConnected || !canvas.width || !canvas.clientWidth) return;
   const data = inst.data;
-  const [i1, i2, d1, d2] = nearestTwo(data, curYaw, curPitch);
+  const [i1, i2, d1, d2] = nearestTwo(data.frames, inst.curX, inst.curY);
   const primary = inst.off[i1].width ? i1 : frontIndex(data);
   if (!inst.off[primary].width) return;
   const ctx = canvas.getContext("2d", { alpha: true });
@@ -177,7 +171,7 @@ function drawInstance(inst) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(inst.off[primary], 0, 0);
   if (reduce || !inst.ready || primary !== i1) return;
-  const pairD = poseDist(data, data.frames[i1], data.frames[i2]);
+  const pairD = poseDist(data.frames[i1], data.frames[i2]);
   if (pairD > 1e-6 && pairD < NEIGHBOR && inst.off[i2].width) {
     const w1 = 1 / Math.pow(d1 + 1e-5, BLEND_K);
     const w2 = 1 / Math.pow(d2 + 1e-5, BLEND_K);
@@ -219,8 +213,8 @@ async function prerender(inst) {
     paintPose(inst.off[frontIndex(data)] || inst.off[0], data, data.frames[frontIndex(data)], m);
     if (inst.token !== token) return;
     inst.ready = true;
-    curYaw = 0;
-    curPitch = 0;
+    inst.curX = 0;
+    inst.curY = 0;
     drawInstance(inst);
     return;
   }
@@ -236,21 +230,34 @@ async function prerender(inst) {
 }
 
 function onPtr(event) {
-  const nx = (event.clientX / window.innerWidth) * 2 - 1;
-  const ny = 1 - (event.clientY / window.innerHeight) * 2;
-  const data = anim;
-  if (!data) return;
-  targetYaw = mapAxis(nx, data.yaw_min, data.yaw_max);
-  targetPitch = mapAxis(ny, data.pitch_min, data.pitch_max);
+  pointerX = event.clientX;
+  pointerY = event.clientY;
+}
+
+function gridTarget(canvas) {
+  const rect = canvas.getBoundingClientRect();
+  const width = rect.width || 1;
+  const height = rect.height || 1;
+  const x = ((pointerX - rect.left) / width) * 2 - 1;
+  const y = 1 - ((pointerY - rect.top) / height) * 2;
+  return {
+    x: Math.max(-1, Math.min(1, x)),
+    y: Math.max(-1, Math.min(1, y)),
+  };
 }
 
 function tick(now) {
-  const dt = Math.min(0.05, (now - last) / 1000 || 0);
+  const dt = Math.min(0.05, last ? (now - last) / 1000 : 0);
   last = now;
-  const k = 1 - Math.exp(-dt / 0.14);
-  curYaw += (targetYaw - curYaw) * k;
-  curPitch += (targetPitch - curPitch) * k;
-  for (const inst of instances) drawInstance(inst);
+  const ease = 1 - Math.exp(-dt / 0.14);
+  for (const inst of instances) {
+    const canvas = inst.canvas;
+    if (!canvas.isConnected || !canvas.clientWidth) continue;
+    const goal = gridTarget(canvas);
+    inst.curX += (goal.x - inst.curX) * ease;
+    inst.curY += (goal.y - inst.curY) * ease;
+    drawInstance(inst);
+  }
   raf = requestAnimationFrame(tick);
 }
 
@@ -270,6 +277,8 @@ function mount() {
           ready: false,
           key: "",
           token: 0,
+          curX: 0,
+          curY: 0,
         };
         instances.push(inst);
         const watch = () => {
@@ -281,7 +290,7 @@ function mount() {
       }
       if (reduce || listening) return;
       listening = true;
-      window.addEventListener("pointermove", onPtr, { passive: true });
+      window.addEventListener("pointermove", onPtr, { capture: true, passive: true });
       last = performance.now();
       raf = requestAnimationFrame(tick);
     })

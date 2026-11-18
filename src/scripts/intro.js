@@ -68,7 +68,8 @@ function boot(openerEl) {
 
   const fit = () => {
     const scale = Math.min(window.innerWidth / STAGE_W, window.innerHeight / STAGE_H);
-    stage.style.transform = `scale(${scale})`;
+    stage.style.transform = "none";
+    stage.style.zoom = String(scale);
   };
 
   const skip = () => settle();
@@ -103,7 +104,7 @@ function boot(openerEl) {
         Promise.all(names.map(loadImage)),
         loadImage(openerEl.dataset.script || scriptEl.getAttribute("src") || ""),
         document.fonts.load('400 175px Tangents').catch(() => []),
-        document.fonts.load('400 175px "Pixelify Sans"').catch(() => []),
+        document.fonts.load('400 175px "Uncut Sans"').catch(() => []),
         document.fonts.ready,
       ]);
       if (ac.signal.aborted) return;
@@ -233,13 +234,15 @@ function paintFinal(ctx, faceImg, scriptImg, nameEl) {
   ctx.drawImage(faceImg, 264, 56, 912, 912);
   const size = parseFloat(getComputedStyle(nameEl).fontSize) || 175.2;
   const slot = nameEl.parentElement;
-  const top = slot ? parseFloat(getComputedStyle(slot).top) || 378 : 378;
+  const slotStyle = slot ? getComputedStyle(slot) : null;
+  const top = slotStyle ? parseFloat(slotStyle.top) || 419 : 419;
+  const left = slotStyle ? parseFloat(slotStyle.left) || 343 : 343;
   ctx.fillStyle = INK;
-  ctx.font = `400 ${size}px Tangents, "Pixelify Sans", sans-serif`;
-  ctx.textAlign = "center";
+  ctx.font = `400 ${size}px Tangents, "Uncut Sans", "Uncut Sans Variable", Inter, sans-serif`;
+  ctx.textAlign = "left";
   ctx.textBaseline = "top";
   ctx.letterSpacing = "0px";
-  ctx.fillText(nameEl.textContent || "angela lau.", STAGE_W / 2, top);
+  ctx.fillText(nameEl.textContent || "ANGELA LAU.", left, top);
   ctx.drawImage(scriptImg, 570, 544, 299, 61);
 }
 
