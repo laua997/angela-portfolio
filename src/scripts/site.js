@@ -265,7 +265,8 @@ function initFeaturedRows() {
     grid.style.gridTemplateRows = "";
     if (!desktop.matches) return;
     const height = Math.round(anchor.getBoundingClientRect().height);
-    if (height > 0) grid.style.gridTemplateRows = `${height}px ${height}px`;
+    const rows = grid.querySelector(".place-sym") ? 2 : 1;
+    if (height > 0) grid.style.gridTemplateRows = Array(rows).fill(`${height}px`).join(" ");
   };
   apply();
   desktop.addEventListener("change", apply);

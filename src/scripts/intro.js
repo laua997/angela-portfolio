@@ -5,7 +5,9 @@ const SCRIBBLE_MS = 400;
 const SCRIBBLE_GAP_MS = 36;
 const GLITCH_MS = 1450;
 const HOLD_MS = 420;
-const SHRINK_MS = 680;
+const SHRINK_MS = 1400;
+const REVEAL_MS = 860;
+const MOVE_EASE = "cubic-bezier(0.65, 0, 0.35, 1)";
 const SCRIBBLE_CELL = 8;
 const GLITCH_CELL = 16;
 const SCRIBBLE = "#ff0066";
@@ -29,7 +31,7 @@ function boot(openerEl) {
   const homeFace = document.querySelector(".home-face");
   const homeName = document.querySelector("[data-home-name]");
   if (!stage || !canvas || !face || !nameEl || !scriptEl || !homeFace || !homeName) {
-    root.classList.remove("intro-pending", "intro-arriving");
+    root.classList.remove("intro-pending", "intro-arriving", "intro-settling", "intro-reveal");
     try {
       sessionStorage.setItem(SEEN_KEY, "1");
     } catch {
@@ -51,7 +53,7 @@ function boot(openerEl) {
     } catch {
       /* private mode */
     }
-    root.classList.remove("intro-pending", "intro-arriving");
+    root.classList.remove("intro-pending", "intro-arriving", "intro-settling", "intro-reveal");
     root.style.overflow = "";
     document.body.style.overflow = "";
     openerEl.style.display = "none";
@@ -80,7 +82,7 @@ function boot(openerEl) {
   window.scrollTo(0, 0);
   fit();
 
-  const safety = window.setTimeout(settle, 9000);
+  const safety = window.setTimeout(settle, 12000);
 
   play().finally(() => {
     window.clearTimeout(safety);
@@ -335,9 +337,9 @@ async function shrink(stage, face, nameEl, scriptEl, homeFace, homeName, signal)
   const openerEl = stage.closest("[data-opener]");
   if (openerEl) openerEl.style.background = "transparent";
   stage.style.background = "transparent";
-  root.classList.add("intro-arriving");
+  root.classList.add("intro-settling");
   root.classList.remove("intro-pending");
-  scriptEl.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 220, easing: "ease", fill: "forwards" });
+  scriptEl.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 520, easing: MOVE_EASE, fill: "forwards" });
   const stageScale = stage.getBoundingClientRect().width / STAGE_W || 1;
   const moves = [
     moveTo(face, homeFace.getBoundingClientRect(), stageScale),
@@ -346,7 +348,7 @@ async function shrink(stage, face, nameEl, scriptEl, homeFace, homeName, signal)
   const running = moves.map((motion) =>
     motion.el.animate(motion.frames, {
       duration: SHRINK_MS,
-      easing: "cubic-bezier(0.76, 0, 0.18, 1)",
+      easing: MOVE_EASE,
       fill: "forwards",
     }),
   );
@@ -354,7 +356,14 @@ async function shrink(stage, face, nameEl, scriptEl, homeFace, homeName, signal)
     Promise.all(running.map((anim) => anim.finished.catch(() => {}))),
     wait(SHRINK_MS + 40, signal),
   ]);
-  if (signal.aborted) running.forEach((anim) => anim.cancel());
+  if (signal.aborted) {
+    running.forEach((anim) => anim.cancel());
+    return;
+  }
+  root.classList.add("intro-reveal");
+  root.classList.remove("intro-settling");
+  if (openerEl) openerEl.style.visibility = "hidden";
+  await wait(REVEAL_MS, signal);
 }
 
 function moveTo(el, target, stageScale) {

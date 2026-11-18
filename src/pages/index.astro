@@ -1,18 +1,10 @@
 ---
 import Base from "../layouts/Base.astro";
 import DotPortrait from "../components/DotPortrait.astro";
-import { asset, getProjects, page, site } from "../lib/content";
+import { asset, getFeatured, page, site, workGroup } from "../lib/content";
 
-const projects = getProjects();
-
-// Desktop 3 drafts the filters as "fine art" and "events". Project files still
-// use Graphic Design / 2D / 3D, so the home groups them: studio work (2D, 3D)
-// is fine art, and graphic design is the events bucket. Easy to remap.
-function homeGroup(category: string): "fine art" | "events" {
-  return category === "Graphic Design" ? "events" : "fine art";
-}
-
-const columns = [projects.filter((_, index) => index % 2 === 0), projects.filter((_, index) => index % 2 === 1)];
+const featured = getFeatured();
+const places = ["miya", "flow", "vis"];
 const nameSvgs = ["images/name-v1.svg", "images/name-v2.svg", "images/name-v3.svg"].map((file) => asset(file));
 ---
 
@@ -37,12 +29,7 @@ const nameSvgs = ["images/name-v1.svg", "images/name-v2.svg", "images/name-v3.sv
   <main id="main" class="home-main">
     <header class="home-top wrap">
       <div class="home-work">
-        <h2 class="tangents home-work-title">work</h2>
-        <div class="home-filters" data-filters data-filters-home>
-          <button type="button" data-filter="all" aria-pressed="true">all</button>
-          <button type="button" data-filter="fine art" aria-pressed="false">fine art</button>
-          <button type="button" data-filter="events" aria-pressed="false">events</button>
-        </div>
+        <h2 class="tangents home-work-title"><a href={page("projects")}>work</a></h2>
       </div>
 
       <div class="home-identity">
@@ -61,24 +48,19 @@ const nameSvgs = ["images/name-v1.svg", "images/name-v2.svg", "images/name-v3.sv
       </nav>
     </header>
 
-    <div class="home-board wrap">
-      {
-        columns.map((column, index) => (
-          <div class:list={["home-col", index === 1 && "home-col-offset"]}>
-            {column.map((project) => (
-              <a
-                class="home-card reveal"
-                data-cursor="explore"
-                data-category={homeGroup(project.category)}
-                href={page(`projects/${project.slug}`)}
-              >
+    <div class="wrap featured">
+      <div class="featured-grid">
+        {
+          featured.map((project, index) => (
+            <div class={`place-${places[index] ?? "miya"}`}>
+              <a class="home-card" data-cursor="explore" href={page(`projects/${project.slug}`)}>
                 <img src={asset(project.cover)} alt={project.title} />
-                <span class="home-card-label">{homeGroup(project.category)}</span>
+                <span class="home-card-label">{workGroup(project.category)}</span>
               </a>
-            ))}
-          </div>
-        ))
-      }
+            </div>
+          ))
+        }
+      </div>
     </div>
   </main>
 </Base>
