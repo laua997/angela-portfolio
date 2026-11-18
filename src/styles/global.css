@@ -6,6 +6,17 @@
   font-display: swap;
 }
 
+/* Pixelify Sans (SIL OFL) is only the stand-in. Tangents itself is loaded
+   from public/fonts/Tangents.woff2 or Tangents.otf — that file is not in the
+   repo yet, so display type falls through to Pixelify until it is added. */
+@font-face {
+  font-family: "Pixelify Sans";
+  src: url("../assets/pixelify-sans-latin-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --ink: #141414;
   --muted: #808080;
@@ -734,4 +745,299 @@ h2, .section-title {
 /* Top nav covers desktop and tablet. The angela. bar is the phone menu. */
 @media (min-width: 810px) {
   .dock { display: none; }
+}
+
+/* Home — Desktop 3. Display words are set in capitals because Tangents draws
+   its uppercase in the lowercase-looking wordmark from the Figma frames. */
+.tangents {
+  font-family: "Tangents", "Pixelify Sans", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
+  font-variation-settings: normal;
+  text-transform: none;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
+}
+
+.home-main {
+  --home-display: 78px;
+  --home-face: 259px;
+  --home-name: 54px;
+}
+
+.home-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: start;
+  column-gap: 20px;
+  padding-top: 28px;
+  padding-bottom: 8px;
+}
+
+.home-work { justify-self: start; padding-top: 6px; }
+.home-work-title {
+  font-size: var(--home-display);
+  line-height: 0.88;
+  max-width: none;
+  color: #000;
+}
+.home-filters {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  margin-top: 14px;
+}
+.home-filters button {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  color: var(--ink);
+  cursor: pointer;
+  text-align: left;
+}
+.home-filters button[aria-pressed="true"] {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.home-filters button:hover { color: var(--accent); text-decoration: none; }
+.home-filters button:focus,
+.home-filters button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.home-identity {
+  display: grid;
+  grid-template-columns: 138px var(--home-face) 138px;
+  column-gap: 22px;
+  justify-content: center;
+  align-items: start;
+}
+.home-mark {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.home-face {
+  width: var(--home-face);
+  height: var(--home-face);
+  object-fit: contain;
+}
+h1.home-name {
+  margin-top: 8px;
+  font-size: var(--home-name);
+  line-height: 0.85;
+  letter-spacing: -0.045em;
+  text-align: center;
+  color: #000;
+  max-width: none;
+  white-space: nowrap;
+}
+.home-blurb {
+  max-width: 14ch;
+  font-size: 15px;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  align-self: center;
+  padding-bottom: 42px;
+}
+.home-blurb-left { grid-column: 1; justify-self: end; }
+.home-blurb-right { grid-column: 3; justify-self: start; max-width: 12ch; }
+
+.home-nav {
+  justify-self: end;
+  padding-top: 6px;
+  text-align: right;
+  font-size: var(--home-display);
+  line-height: 0.9;
+  color: #000;
+}
+.home-nav a {
+  display: block;
+  color: inherit;
+  transition: color 0.2s var(--ease-in-out);
+}
+.home-nav a:hover { color: var(--accent); }
+.home-nav a:focus,
+.home-nav a:focus-visible,
+.home-card:focus,
+.home-card:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.home-board {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 28px;
+  align-items: start;
+  padding-top: 72px;
+  padding-bottom: 128px;
+}
+.home-col-offset { margin-top: 128px; }
+.home-card {
+  display: block;
+  margin: 0 0 40px;
+  color: inherit;
+}
+.home-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 16px;
+  background: #d9d9d9;
+}
+.home-card-label {
+  display: block;
+  margin-top: 8px;
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+.home-card.is-hidden { display: none; }
+
+.opener {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  background: #fff;
+  place-items: center;
+  overflow: hidden;
+}
+html.intro-pending .opener,
+html.intro-arriving .opener { display: grid; }
+html.intro-pending .home-main { opacity: 0; }
+html.intro-arriving .home-main {
+  opacity: 1;
+  transition: opacity 0.28s linear;
+}
+html.intro-arriving .home-face,
+html.intro-arriving .home-name { opacity: 0; }
+
+.opener-stage {
+  position: relative;
+  width: 1440px;
+  height: 1024px;
+  flex: none;
+  transform-origin: center center;
+  background: #fff;
+}
+.opener-canvas {
+  position: absolute;
+  inset: 0;
+  width: 1440px;
+  height: 1024px;
+  z-index: 4;
+  pointer-events: none;
+}
+.opener-face {
+  position: absolute;
+  left: 264px;
+  top: 56px;
+  width: 912px;
+  height: 912px;
+  object-fit: fill;
+  z-index: 1;
+  opacity: 0;
+}
+.opener-name-slot {
+  position: absolute;
+  left: 50%;
+  top: 378px;
+  transform: translateX(-50%);
+  z-index: 2;
+  opacity: 0;
+}
+.opener-name {
+  margin: 0;
+  font-size: 175.2px;
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  color: #000;
+  white-space: nowrap;
+  text-align: center;
+}
+.opener-script {
+  position: absolute;
+  left: 570px;
+  top: 544px;
+  width: 299px;
+  height: 61px;
+  z-index: 3;
+  opacity: 0;
+}
+.opener.is-final .opener-face,
+.opener.is-final .opener-name-slot,
+.opener.is-final .opener-script { opacity: 1; }
+.opener.is-final .opener-canvas { opacity: 0; }
+.opener-face,
+.opener-name-slot,
+.opener-script,
+.opener-canvas { transition: opacity 90ms linear; }
+
+@media (max-width: 1100px) {
+  .home-main {
+    --home-display: 48px;
+    --home-face: 180px;
+    --home-name: 36px;
+  }
+  .home-identity { grid-template-columns: 108px var(--home-face) 108px; column-gap: 12px; }
+  .home-blurb { font-size: 14px; padding-bottom: 28px; }
+  .home-col-offset { margin-top: 72px; }
+}
+
+@media (max-width: 809px) {
+  .home-main { --home-display: 44px; --home-face: min(220px, 62vw); --home-name: 32px; }
+  .home-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding-top: 72px;
+    text-align: center;
+  }
+  .home-work, .home-nav { padding-top: 0; }
+  .home-identity { order: -1; }
+  .home-filters { align-items: center; }
+  .home-filters button { text-align: center; }
+  .home-blurb, .home-blurb-left, .home-blurb-right {
+    max-width: 22ch;
+    justify-self: center;
+    text-align: center;
+    padding-bottom: 0;
+  }
+  .home-identity {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .home-mark { order: -1; }
+  .home-nav { display: none; }
+  .home-board {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 12px;
+    padding-bottom: 96px;
+  }
+  .home-col-offset { margin-top: 0; }
+  .home-card img { border-radius: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.intro-pending .home-main { opacity: 1 !important; }
+  html.intro-pending .opener,
+  html.intro-arriving .opener { display: none !important; }
+  .opener-face,
+  .opener-name-slot,
+  .opener-script,
+  .opener-canvas,
+  html.intro-arriving .home-main { transition: none !important; }
 }

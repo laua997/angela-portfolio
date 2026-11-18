@@ -1,0 +1,13 @@
+---
+import { asset } from "../lib/content";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+// Stand-in for the dot portrait. Swap this <img> for the animated portrait
+// component when that work lands; callers only pass a class.
+---
+
+<img class={className} src={asset("images/face-ascii.png")} alt="" draggable="false" data-face-ascii />

@@ -20,6 +20,10 @@ npm run build
 npm run preview
 ```
 
+## Fonts
+
+Body copy uses Uncut Sans (`src/assets/uncut-sans.woff2`). Display type — the wordmark, “WORK”, and the home nav — is **Tangents**. That file is not in the repo. Drop `Tangents.woff2` or `Tangents.otf` into `public/fonts/` (both names are already wired with `@font-face`). Until then the page uses Pixelify Sans, a pixel fallback, so the capitals will not match the Figma wordmark.
+
 ## Add or edit a project
 
 Each project is a JSON file in `src/data/projects/`. Copy an existing file, give it a new `slug`, and fill in the fields:

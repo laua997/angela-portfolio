@@ -11,6 +11,8 @@ interface Props {
 
 const { title = site.title, description = site.description } = Astro.props;
 const path = Astro.url.pathname;
+const tangentsWoff = asset("fonts/Tangents.woff2");
+const tangentsOtf = asset("fonts/Tangents.otf");
 ---
 
 <!doctype html>
@@ -26,6 +28,31 @@ const path = Astro.url.pathname;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <link rel="canonical" href={new URL(path, Astro.site)} />
+    <script is:inline define:vars={{ tangentsWoff, tangentsOtf }}>
+      (function () {
+        var style = document.createElement("style");
+        style.textContent =
+          '@font-face{font-family:"Tangents";src:url("' +
+          tangentsWoff +
+          '") format("woff2"),url("' +
+          tangentsOtf +
+          '") format("opentype");font-weight:400;font-style:normal;font-display:swap;}';
+        document.head.appendChild(style);
+        try {
+          var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          var seen = sessionStorage.getItem("angela-intro-seen") === "1";
+          if (!reduce && !seen) {
+            document.documentElement.classList.add("intro-pending");
+            window.setTimeout(function () {
+              var html = document.documentElement;
+              if (html.classList.contains("intro-pending") && !document.body.dataset.introLive) {
+                html.classList.remove("intro-pending");
+              }
+            }, 8000);
+          }
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body data-cursor={asset(site.cursor)}>
     <a class="skip" href="#main">Skip to content</a>

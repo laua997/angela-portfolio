@@ -1,65 +1,88 @@
 ---
 import Base from "../layouts/Base.astro";
-import HeroNav from "../components/HeroNav.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import { getProjects, site } from "../lib/content";
+import DotPortrait from "../components/DotPortrait.astro";
+import { asset, getProjects, page, site } from "../lib/content";
 
 const projects = getProjects();
-const bySlug = new Map(projects.map((project) => [project.slug, project]));
-const featured = site.featured
-  .map((item) => ({ ...item, project: bySlug.get(item.slug) }))
-  .filter((item) => item.project);
-const wins = site.wins.map((slug) => bySlug.get(slug)).filter(Boolean);
+
+// Desktop 3 drafts the filters as "fine art" and "events". Project files still
+// use Graphic Design / 2D / 3D, so the home groups them: studio work (2D, 3D)
+// is fine art, and graphic design is the events bucket. Easy to remap.
+function homeGroup(category: string): "fine art" | "events" {
+  return category === "Graphic Design" ? "events" : "fine art";
+}
+
+const columns = [projects.filter((_, index) => index % 2 === 0), projects.filter((_, index) => index % 2 === 1)];
+const nameSvgs = ["images/name-v1.svg", "images/name-v2.svg", "images/name-v3.svg"].map((file) => asset(file));
 ---
 
 <Base>
-  <main id="main">
-    <section class="wrap hero home-hero">
-      <h1 class="appear appear-lg appear-d1">angela lau.</h1>
-      <div class="hero-side appear appear-d2">
-        <HeroNav />
-        <p class="lede">{site.tagline}</p>
+  <div
+    class="opener"
+    data-opener
+    data-script={asset("images/portfolio-script.svg")}
+    data-names={nameSvgs.join("|")}
+    aria-hidden="true"
+  >
+    <div class="opener-stage" data-opener-stage>
+      <canvas class="opener-canvas" data-opener-canvas width="1440" height="1024"></canvas>
+      <DotPortrait class="opener-face" />
+      <div class="opener-name-slot">
+        <p class="opener-name tangents" data-opener-name>ANGELA LAU.</p>
       </div>
-    </section>
+      <img class="opener-script" data-opener-script src={asset("images/portfolio-script.svg")} alt="" />
+    </div>
+  </div>
 
-    <section class="wrap featured" aria-label="Featured projects">
-      <div class="featured-grid">
-        {
-          featured.map((item) => (
-            <div class={`place-${item.place} reveal`}>
-              <ProjectCard project={item.project!} />
-            </div>
-          ))
-        }
-      </div>
-    </section>
-
-    <section class="wins">
-      <div class="wrap wins-grid">
-        <div>
-          <h2 class="reveal">wins.</h2>
-          <div class="wins-work">
-            {wins.map((project) => project && <div class="reveal"><ProjectCard project={project} /></div>)}
-          </div>
-        </div>
-        <div>
-          <h2 class="reveal">awards & recognition</h2>
-          <div class="awards">
-            {
-              site.awards.map((award) => (
-                <article class="award reveal">
-                  <div class="award-head">
-                    <p class="award-name">{award.name}</p>
-                    <p class="award-date">{award.date}</p>
-                  </div>
-                  <p class="award-prize">{award.prize}</p>
-                  <p class="award-detail">{award.detail}</p>
-                </article>
-              ))
-            }
-          </div>
+  <main id="main" class="home-main">
+    <header class="home-top wrap">
+      <div class="home-work">
+        <h2 class="tangents home-work-title">WORK</h2>
+        <div class="home-filters" data-filters data-filters-home>
+          <button type="button" data-filter="all" aria-pressed="true">all</button>
+          <button type="button" data-filter="fine art" aria-pressed="false">fine art</button>
+          <button type="button" data-filter="events" aria-pressed="false">events</button>
         </div>
       </div>
-    </section>
+
+      <div class="home-identity">
+        <p class="home-blurb home-blurb-left">artist. a fan of all things creative.</p>
+        <div class="home-mark">
+          <DotPortrait class="home-face" />
+          <h1 class="tangents home-name" data-home-name>ANGELA LAU.</h1>
+        </div>
+        <p class="home-blurb home-blurb-right">aspiring creative director.</p>
+      </div>
+
+      <nav class="home-nav tangents" aria-label="Primary">
+        <a href={page("about")}>ABOUT</a>
+        <a href={page("contact")}>CONTACT</a>
+        <a href={site.links.linkedin} target="_blank" rel="noreferrer">LINKEDIN</a>
+      </nav>
+    </header>
+
+    <div class="home-board wrap">
+      {
+        columns.map((column, index) => (
+          <div class:list={["home-col", index === 1 && "home-col-offset"]}>
+            {column.map((project) => (
+              <a
+                class="home-card reveal"
+                data-cursor="explore"
+                data-category={homeGroup(project.category)}
+                href={page(`projects/${project.slug}`)}
+              >
+                <img src={asset(project.cover)} alt={project.title} />
+                <span class="home-card-label">{homeGroup(project.category)}</span>
+              </a>
+            ))}
+          </div>
+        ))
+      }
+    </div>
   </main>
 </Base>
+
+<script>
+  import "../scripts/intro.js";
+</script>
