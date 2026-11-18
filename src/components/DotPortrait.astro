@@ -6,8 +6,7 @@ interface Props {
 }
 
 const { class: className = "" } = Astro.props;
-// Stand-in for the dot portrait. Swap this <img> for the animated portrait
-// component when that work lands; callers only pass a class.
+const frames = asset("dotface/frames.js");
 ---
 
-<img class={className} src={asset("images/face-ascii.png")} alt="" draggable="false" data-face-ascii />
+<canvas class={className} data-dotface data-frames={frames} aria-hidden="true"></canvas>

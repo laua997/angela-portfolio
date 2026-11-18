@@ -1,4 +1,5 @@
 import { GLYPHS, hash } from "./grid.js";
+import { frontPlate } from "./dotface.js";
 
 const STAGE_W = 1440;
 const STAGE_H = 1024;
@@ -97,10 +98,10 @@ function boot(openerEl) {
   async function play() {
     try {
       const names = (openerEl.dataset.names || "").split("|").filter(Boolean);
-      const [nameImgs, scriptImg, faceImg] = await Promise.all([
+      const facePromise = frontPlate(912);
+      const [nameImgs, scriptImg] = await Promise.all([
         Promise.all(names.map(loadImage)),
         loadImage(openerEl.dataset.script || scriptEl.getAttribute("src") || ""),
-        loadImage(face.getAttribute("src") || ""),
         document.fonts.load('400 175px Tangents').catch(() => []),
         document.fonts.load('400 175px "Pixelify Sans"').catch(() => []),
         document.fonts.ready,
@@ -146,6 +147,7 @@ function boot(openerEl) {
         settle();
         return;
       }
+      const faceImg = await facePromise;
       paintFinal(pctx, faceImg, scriptImg, nameEl);
       const cells = buildGlitchCells(sctx, (g) => g.drawImage(plate, 0, 0), 5);
       await frames(GLITCH_MS, ac.signal, (t) => {

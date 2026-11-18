@@ -859,7 +859,9 @@ h2, .section-title {
 .home-face {
   width: var(--home-face);
   height: var(--home-face);
-  object-fit: contain;
+  display: block;
+  background: transparent;
+  outline: none;
 }
 h1.home-name {
   margin-top: 8px;
@@ -1075,7 +1077,9 @@ html.intro-reveal .home-awards { animation-delay: 0.14s; }
   top: 56px;
   width: 912px;
   height: 912px;
-  object-fit: fill;
+  display: block;
+  background: transparent;
+  outline: none;
   z-index: 1;
   opacity: 0;
 }
