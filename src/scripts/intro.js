@@ -1,3 +1,5 @@
+import { GLYPHS, hash } from "./grid.js";
+
 const STAGE_W = 1440;
 const STAGE_H = 1024;
 const SEEN_KEY = "angela-intro-seen";
@@ -11,7 +13,6 @@ const MOVE_EASE = "cubic-bezier(0.65, 0, 0.35, 1)";
 const SCRIBBLE_CELL = 8;
 const GLITCH_CELL = 16;
 const SCRIBBLE = "#ff0066";
-const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*+=/<>";
 const INK = "#000";
 
 const root = document.documentElement;
@@ -416,8 +417,3 @@ function wait(ms, signal) {
   });
 }
 
-function hash(n, t) {
-  let x = Math.imul(n + 1, 374761393) + Math.imul(t + 1, 668265263);
-  x = Math.imul(x ^ (x >>> 13), 1274126177);
-  return (x ^ (x >>> 16)) >>> 0;
-}

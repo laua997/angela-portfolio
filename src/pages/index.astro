@@ -29,7 +29,7 @@ const nameSvgs = ["images/name-v1.svg", "images/name-v2.svg", "images/name-v3.sv
   <main id="main" class="home-main">
     <header class="home-top wrap">
       <div class="home-work">
-        <h2 class="tangents home-work-title"><a href={page("projects")}>work</a></h2>
+        <h2 class="tangents home-work-title"><a class="halftone" href={page("projects")}><span class="halftone-label">work</span></a></h2>
       </div>
 
       <div class="home-identity">
@@ -42,8 +42,8 @@ const nameSvgs = ["images/name-v1.svg", "images/name-v2.svg", "images/name-v3.sv
       </div>
 
       <nav class="home-nav tangents" aria-label="Primary">
-        <a href={page("about")}>about</a>
-        <a href={page("contact")}>contact</a>
+        <a class="halftone" href={page("about")}><span class="halftone-label">about</span></a>
+        <a class="halftone" href={page("contact")}><span class="halftone-label">contact</span></a>
         <a href={site.links.linkedin} target="_blank" rel="noreferrer">linkedin</a>
       </nav>
     </header>
@@ -67,4 +67,5 @@ const nameSvgs = ["images/name-v1.svg", "images/name-v2.svg", "images/name-v3.sv
 
 <script>
   import "../scripts/intro.js";
+  import "../scripts/halftone.js";
 </script>
