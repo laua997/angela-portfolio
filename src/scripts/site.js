@@ -211,10 +211,20 @@ function initFilters() {
   const bar = document.querySelector("[data-filters]");
   if (!bar) return;
   const cards = [...document.querySelectorAll("[data-category]")];
+  const home = bar.hasAttribute("data-filters-home");
   bar.addEventListener("click", (event) => {
     const button = event.target instanceof Element ? event.target.closest("button[data-filter]") : null;
     if (!button) return;
     const value = button.getAttribute("data-filter");
+    if (home) {
+      bar.querySelectorAll("button[data-filter]").forEach((el) => el.setAttribute("aria-pressed", "false"));
+      button.setAttribute("aria-pressed", "true");
+      cards.forEach((card) => {
+        const show = value === "all" || card.getAttribute("data-category") === value;
+        card.classList.toggle("is-hidden", !show);
+      });
+      return;
+    }
     const pressed = button.getAttribute("aria-pressed") === "true";
     bar.querySelectorAll("button[data-filter]").forEach((el) => el.setAttribute("aria-pressed", "false"));
     const next = pressed ? "" : value;
@@ -255,7 +265,8 @@ function initFeaturedRows() {
     grid.style.gridTemplateRows = "";
     if (!desktop.matches) return;
     const height = Math.round(anchor.getBoundingClientRect().height);
-    if (height > 0) grid.style.gridTemplateRows = `${height}px ${height}px`;
+    const rows = grid.querySelector(".place-sym") ? 2 : 1;
+    if (height > 0) grid.style.gridTemplateRows = Array(rows).fill(`${height}px`).join(" ");
   };
   apply();
   desktop.addEventListener("change", apply);

@@ -20,6 +20,10 @@ npm run build
 npm run preview
 ```
 
+## Fonts
+
+Body copy uses Uncut Sans (`src/assets/uncut-sans.woff2`). Display type — the wordmark, “work”, the home nav, the awards heading, and the footer name — is **Tangents** (`public/fonts/Tangents.woff2` and `Tangents.ttf`), set in lowercase. Tangents only covers A–Z, a–z, space, and “?”. Other characters, including the period and “&”, use Uncut Sans.
+
 ## Add or edit a project
 
 Each project is a JSON file in `src/data/projects/`. Copy an existing file, give it a new `slug`, and fill in the fields:
