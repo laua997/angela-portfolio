@@ -22,7 +22,7 @@ npm run preview
 
 ## Fonts
 
-Body copy uses Uncut Sans (`src/assets/uncut-sans.woff2`). Display type — the wordmark, “work”, the home nav, the awards heading, and the footer name — is **Tangents** (`public/fonts/Tangents.woff2` and `Tangents.ttf`), set in lowercase. Tangents only covers A–Z, a–z, space, and “?”. Other characters, including the period and “&”, use Uncut Sans.
+Body copy uses Uncut Sans (`src/assets/uncut-sans.woff2`). The biggest display headers — the wordmark, the work/about/contact/linkedin nav, top-level page and section titles (including “awards & recognition”), and the footer name — are **Tangents** (`public/fonts/Tangents.woff2` and `Tangents.ttf`), set in lowercase. Tangents only covers A–Z, a–z, space, and “?”. Other characters, including the period and “&”, use Uncut Sans. Secondary headings such as award titles use Helvetica Neue Bold.
 
 ## Add or edit a project
 

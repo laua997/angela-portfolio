@@ -963,10 +963,16 @@ h1.home-name {
   margin: 0 0 40px;
   color: inherit;
 }
+.home-card,
+.home-card img,
+.card,
+.card img {
+  border-radius: 0;
+}
 .home-card img {
   width: 100%;
   height: auto;
-  border-radius: 16px;
+  border-radius: 0;
   background: #d9d9d9;
 }
 .featured-grid .home-card { width: 100%; margin: 0; }
@@ -1020,6 +1026,8 @@ h1.home-name {
   gap: 24px;
 }
 .home-award-prize {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
   font-size: clamp(28px, 2.4vw, 40px);
   color: #000;
   transition: color 0.2s var(--ease-in-out);
@@ -1179,7 +1187,7 @@ html.intro-reveal .home-awards { animation-delay: 0.14s; }
     padding-bottom: 96px;
   }
   .home-col-offset { margin-top: 0; }
-  .home-card img { border-radius: 16px; }
+  .home-card img { border-radius: 0; }
   .home-awards { padding-bottom: 96px; }
   .home-award-top { flex-wrap: wrap; }
   .home-award-date { margin-left: auto; }
