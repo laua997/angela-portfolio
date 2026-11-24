@@ -1030,6 +1030,7 @@ h1.home-name {
   font-weight: 700;
   font-size: clamp(28px, 2.4vw, 40px);
   color: #000;
+  text-transform: lowercase;
   transition: color 0.2s var(--ease-in-out);
 }
 .home-award:hover .home-award-prize { color: #ff1493; }
