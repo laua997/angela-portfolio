@@ -14,6 +14,7 @@ export type Project = {
   paragraphs: string[];
   related: string[];
   order: number;
+  featured?: boolean;
 };
 
 export const base = import.meta.env.BASE_URL;
@@ -54,6 +55,19 @@ export function getProjects(): Project[] {
   return Object.values(modules)
     .map((mod) => mod.default)
     .sort((a, b) => a.order - b.order);
+}
+
+/** Graphic design is the events bucket; studio work (2D, 3D) is fine art. */
+export function workGroup(category: string): "fine art" | "events" {
+  return category === "Graphic Design" ? "events" : "fine art";
+}
+
+const featuredOrder = ["miya-deco-atelier", "flowstage", "vis-major-ss26"];
+
+export function getFeatured(): Project[] {
+  return getProjects()
+    .filter((project) => project.featured)
+    .sort((a, b) => featuredOrder.indexOf(a.slug) - featuredOrder.indexOf(b.slug));
 }
 
 export function getProject(slug: string): Project | undefined {

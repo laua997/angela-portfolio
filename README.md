@@ -20,6 +20,10 @@ npm run build
 npm run preview
 ```
 
+## Fonts
+
+Body copy uses Uncut Sans (`src/assets/uncut-sans.woff2`). The biggest display headers — the wordmark, the work/about/contact/linkedin nav, top-level page and section titles (including “awards & recognition”), and the footer name — are **Tangents** (`public/fonts/Tangents.woff2` and `Tangents.ttf`), set in lowercase. Tangents only covers A–Z, a–z, space, and “?”. Other characters, including the period and “&”, use Uncut Sans. Secondary headings such as award titles use Helvetica Neue Bold.
+
 ## Add or edit a project
 
 Each project is a JSON file in `src/data/projects/`. Copy an existing file, give it a new `slug`, and fill in the fields:

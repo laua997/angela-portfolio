@@ -1,0 +1,12 @@
+---
+import { asset } from "../lib/content";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = "" } = Astro.props;
+const frames = asset("dotface/frames.js");
+---
+
+<canvas class={className} data-dotface data-frames={frames} aria-hidden="true"></canvas>

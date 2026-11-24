@@ -1,0 +1,31 @@
+name: Refresh preview site
+
+# Asks angela-portfolio-preview to rebuild this branch. That repo deploys
+# itself, so this does not publish the live angela-portfolio Pages site.
+on:
+  push:
+    branches:
+      - cursor/home-opener-revamp-f9e9
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ask the preview repo to rebuild
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          code=$(curl -s -o /tmp/dispatch.json -w "%{http_code}" -X POST \
+            -H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/laua997/angela-portfolio-preview/dispatches \
+            -d '{"event_type":"preview"}')
+          echo "dispatch status ${code}"
+          cat /tmp/dispatch.json
+          if [ "$code" != "204" ]; then
+            echo "Cross-repo dispatch was not accepted. The preview repo rebuilds this branch every 5 minutes."
+          fi

@@ -1,34 +1,41 @@
 ---
 import Base from "../../layouts/Base.astro";
 import HeroNav from "../../components/HeroNav.astro";
-import ProjectCard from "../../components/ProjectCard.astro";
-import { getProjects } from "../../lib/content";
+import { asset, getProjects, page, workGroup } from "../../lib/content";
 
 const projects = getProjects();
 ---
 
-<Base title="Projects - Angela Lau Portfolio">
-  <main id="main">
+<Base title="Work - Angela Lau Portfolio">
+  <main id="main" class="work-main">
     <section class="wrap hero">
-      <h1 class="appear appear-lg appear-d1">all artwork.</h1>
+      <div class="appear appear-lg appear-d1">
+        <h1 class="tangents home-work-title">work</h1>
+        <div class="home-filters" data-filters data-filters-home>
+          <button type="button" data-filter="all" aria-pressed="true">all</button>
+          <button type="button" data-filter="fine art" aria-pressed="false">fine art</button>
+          <button type="button" data-filter="events" aria-pressed="false">events</button>
+        </div>
+      </div>
       <div class="hero-side appear appear-d2">
         <HeroNav />
       </div>
     </section>
     <section class="wrap">
-      <div class="work-intro">
-        <p>what I do.</p>
-        <div class="filters" data-filters>
-          <span class="filter-label">filter by &gt;</span>
-          <button class="slide-link" type="button" data-label="graphic design" data-filter="Graphic Design" aria-pressed="false">graphic design</button>
-          <span>.</span>
-          <button class="slide-link" type="button" data-label="2d" data-filter="2D" aria-pressed="false">2d</button>
-          <span>.</span>
-          <button class="slide-link" type="button" data-label="3d" data-filter="3D" aria-pressed="false">3d</button>
-        </div>
-      </div>
-      <div class="work-grid">
-        {projects.map((project) => <div class="reveal"><ProjectCard project={project} showMeta /></div>)}
+      <div class="work-board">
+        {
+          projects.map((project) => (
+            <a
+              class="home-card reveal"
+              data-cursor="explore"
+              data-category={workGroup(project.category)}
+              href={page(`projects/${project.slug}`)}
+            >
+              <img src={asset(project.cover)} alt={project.title} />
+              <span class="home-card-label">{workGroup(project.category)}</span>
+            </a>
+          ))
+        }
       </div>
     </section>
   </main>

@@ -1,0 +1,46 @@
+name: Preview
+
+# Publishes this branch as a static preview. It force-pushes the built files
+# to the preview-f9e9 branch only. It does not call deploy-pages, so the live
+# GitHub Pages site on main is left alone.
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - cursor/home-opener-revamp-f9e9
+
+permissions:
+  contents: write
+
+concurrency:
+  group: preview-f9e9
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install
+        run: npm ci
+      - name: Build
+        env:
+          ASTRO_SITE: https://raw.githack.com
+          ASTRO_BASE: /laua997/angela-portfolio/preview-f9e9/
+        run: npm run build
+      - name: Publish preview branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd dist
+          touch .nojekyll
+          git init -b preview-f9e9
+          git add -A
+          git -c user.email="github-actions[bot]@users.noreply.github.com" -c user.name="github-actions[bot]" commit -m "Preview build"
+          git push --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" HEAD:preview-f9e9

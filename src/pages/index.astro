@@ -1,65 +1,95 @@
 ---
 import Base from "../layouts/Base.astro";
-import HeroNav from "../components/HeroNav.astro";
-import ProjectCard from "../components/ProjectCard.astro";
-import { getProjects, site } from "../lib/content";
+import DotPortrait from "../components/DotPortrait.astro";
+import { asset, getFeatured, page, site, workGroup } from "../lib/content";
 
-const projects = getProjects();
-const bySlug = new Map(projects.map((project) => [project.slug, project]));
-const featured = site.featured
-  .map((item) => ({ ...item, project: bySlug.get(item.slug) }))
-  .filter((item) => item.project);
-const wins = site.wins.map((slug) => bySlug.get(slug)).filter(Boolean);
+const featured = getFeatured();
+const places = ["miya", "flow", "vis"];
+const nameSvgs = ["images/name-v1.svg", "images/name-v2.svg", "images/name-v3.svg"].map((file) => asset(file));
 ---
 
 <Base>
-  <main id="main">
-    <section class="wrap hero home-hero">
-      <h1 class="appear appear-lg appear-d1">angela lau.</h1>
-      <div class="hero-side appear appear-d2">
-        <HeroNav />
-        <p class="lede">{site.tagline}</p>
+  <div
+    class="opener"
+    data-opener
+    data-script={asset("images/portfolio-script.svg")}
+    data-names={nameSvgs.join("|")}
+    aria-hidden="true"
+  >
+    <div class="opener-stage" data-opener-stage>
+      <canvas class="opener-canvas" data-opener-canvas width="1440" height="1024"></canvas>
+      <DotPortrait class="opener-face" />
+      <div class="opener-name-slot">
+        <p class="opener-name tangents" data-opener-name>ANGELA LAU.</p>
       </div>
-    </section>
+      <img class="opener-script" data-opener-script src={asset("images/portfolio-script.svg")} alt="" />
+    </div>
+  </div>
 
-    <section class="wrap featured" aria-label="Featured projects">
+  <main id="main" class="home-main">
+    <header class="home-figma">
+      <div class="home-figma-stage">
+        <div class="home-col home-col-left">
+          <div class="home-work">
+            <h2 class="tangents home-work-title"><a class="halftone" href={page("projects")}><span class="halftone-label">work</span></a></h2>
+          </div>
+          <nav class="home-filters" aria-label="Work">
+            <a href={page("projects")}>all</a>
+            <a href={page("projects")}>fine art</a>
+            <a href={page("projects")}>events</a>
+          </nav>
+        </div>
+        <div class="home-col home-col-center">
+          <p class="home-blurb home-blurb-left">artist. a fan of all things creative.</p>
+          <DotPortrait class="home-face" />
+          <h1 class="tangents home-name" data-home-name>ANGELA LAU.</h1>
+          <p class="home-blurb home-blurb-right">aspiring creative director.</p>
+        </div>
+        <nav class="home-col home-col-right home-nav tangents" aria-label="Primary">
+          <a class="halftone" href={page("about")}><span class="halftone-label">about</span></a>
+          <a class="halftone" href={page("contact")}><span class="halftone-label">contact</span></a>
+          <a href={site.links.linkedin} target="_blank" rel="noreferrer">linkedin</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="wrap featured">
       <div class="featured-grid">
         {
-          featured.map((item) => (
-            <div class={`place-${item.place} reveal`}>
-              <ProjectCard project={item.project!} />
+          featured.map((project, index) => (
+            <div class={`place-${places[index] ?? "miya"}`}>
+              <a class="home-card" data-cursor="explore" href={page(`projects/${project.slug}`)}>
+                <img src={asset(project.cover)} alt={project.title} />
+                <span class="home-card-label">{workGroup(project.category)}</span>
+              </a>
             </div>
           ))
         }
       </div>
-    </section>
+    </div>
 
-    <section class="wins">
-      <div class="wrap wins-grid">
-        <div>
-          <h2 class="reveal">wins.</h2>
-          <div class="wins-work">
-            {wins.map((project) => project && <div class="reveal"><ProjectCard project={project} /></div>)}
-          </div>
-        </div>
-        <div>
-          <h2 class="reveal">awards & recognition</h2>
-          <div class="awards">
-            {
-              site.awards.map((award) => (
-                <article class="award reveal">
-                  <div class="award-head">
-                    <p class="award-name">{award.name}</p>
-                    <p class="award-date">{award.date}</p>
-                  </div>
-                  <p class="award-prize">{award.prize}</p>
-                  <p class="award-detail">{award.detail}</p>
-                </article>
-              ))
-            }
-          </div>
-        </div>
-      </div>
+    <section class="wrap home-awards" aria-labelledby="awards-heading">
+      <h2 id="awards-heading" class="tangents home-awards-title">awards & recognition</h2>
+      <ol class="home-awards-list">
+        {
+          site.awards.map((award) => (
+            <li class="home-award">
+              <div class="home-award-top">
+                <p class="home-award-prize">{award.prize}</p>
+                <p class="home-award-date">{award.date}</p>
+              </div>
+              <p class="home-award-name">{award.name}</p>
+              {award.detail ? <p class="home-award-detail">{award.detail}</p> : null}
+            </li>
+          ))
+        }
+      </ol>
     </section>
   </main>
 </Base>
+
+<script>
+  import "../scripts/intro.js";
+  import "../scripts/dotface.js";
+  import "../scripts/halftone.js";
+</script>
